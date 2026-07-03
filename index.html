@@ -3,258 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ekkeshis + Ierodiakonou | Chartered Accountants — Nicosia, Cyprus</title>
-  <meta name="description" content="Ekkeshis + Ierodiakonou is an independent Cyprus firm providing quality professional services in Audit, Tax, Compliance, Advisory, Insolvency and Fiduciary services.">
+  <title>Nexus — Websites that win clients</title>
+  <meta name="description" content="Nexus designs and builds modern websites, online shops and redesigns for businesses. Based in Cyprus, working worldwide. DM us on Instagram @nexus_aea.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container nav-bar">
-      <a href="index.html" class="brand">
-        <span class="brand-mark">E+I</span>
-        <span>
-          <span class="brand-name">Ekkeshis + Ierodiakonou</span>
-          <span class="brand-sub">Chartered Accountants</span>
-        </span>
+  <!-- ===== Navigation ===== -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__logo" aria-label="Nexus home">
+        <span class="nav__logo-mark">N</span>
+        <span class="nav__logo-text">Nexus</span>
       </a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="our-firm.html">Our Firm</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
-      </ul>
+      <nav class="nav__links" id="navLinks" aria-label="Main navigation">
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#process" data-i18n="nav.process">Process</a>
+        <a href="#testimonials" data-i18n="nav.testimonials">Testimonials</a>
+        <a href="#contact" class="btn btn--small btn--primary" data-i18n="nav.contact">Get in touch</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+          <span data-lang-label>ΕΛ</span>
+        </button>
+        <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <svg class="hero-pattern" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-      <defs>
-        <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
-          <path d="M56 0H0v56" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)"/>
-    </svg>
-    <div class="container hero-inner">
-      <div>
-        <span class="eyebrow">Nicosia · Cyprus</span>
-        <h1>Clarity and confidence for <em>your business</em>, at every stage.</h1>
-        <p>We are an independent Cyprus firm of chartered accountants providing quality professional services in Audit, Tax, Compliance, Advisory, Insolvency and Fiduciary matters — delivered on a timely, efficient and cost-effective basis.</p>
-        <div class="hero-actions">
-          <a href="services.html" class="btn btn-gold">Explore Our Services <span class="arrow">→</span></a>
-          <a href="contact.html" class="btn btn-outline">Talk to a Partner</a>
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="hero__glow hero__glow--cyan" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--yellow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <p class="hero__kicker" data-i18n="hero.kicker">Web studio · Cyprus &amp; worldwide</p>
+        <h1 class="hero__title">
+          <span data-i18n="hero.title1">Websites that make your business</span>
+          <span class="hero__title-accent" data-i18n="hero.title2">impossible to ignore.</span>
+        </h1>
+        <p class="hero__sub" data-i18n="hero.sub">
+          Nexus designs and builds fast, modern websites and online shops for
+          businesses that want to stand out and win more clients.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="https://www.instagram.com/nexus_aea" target="_blank" rel="noopener" data-i18n="hero.cta1">DM us on Instagram</a>
+          <a class="btn btn--ghost" href="#work" data-i18n="hero.cta2">See our work</a>
         </div>
-      </div>
-      <div class="hero-card">
-        <h3>What We Do</h3>
-        <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Audit &amp; Assurance</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Tax Services</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Compliance Services</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Advisory Services</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Insolvency Services</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#d9b56a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Fiduciary Services</li>
+        <ul class="hero__stats">
+          <li><strong data-i18n="stats.n1">15+</strong><span data-i18n="stats.l1">Projects delivered</span></li>
+          <li><strong data-i18n="stats.n2">100%</strong><span data-i18n="stats.l2">Custom-built</span></li>
+          <li><strong data-i18n="stats.n3">7 days</strong><span data-i18n="stats.l3">Average first draft</span></li>
         </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="stats-band">
-    <div class="container stats-grid">
-      <div class="stat"><div class="num">20+</div><div class="label">Years of Experience</div></div>
-      <div class="stat"><div class="num">6</div><div class="label">Service Lines</div></div>
-      <div class="stat"><div class="num">2</div><div class="label">Chartered Partners</div></div>
-      <div class="stat"><div class="num">1</div><div class="label">Dedicated Team</div></div>
-    </div>
-  </section>
-
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Our Services</span>
-        <h2 class="section-title">Comprehensive professional services under one roof</h2>
-        <p class="section-lead">From the sole entrepreneur and the owner-managed business to large multinational groups — we tailor our services to the needs of every client.</p>
-      </div>
-      <div class="services-grid">
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7l7-4z"/></svg>
-          </div>
-          <h3>Audit &amp; Assurance</h3>
-          <p>Statutory audit of annual and interim financial statements in accordance with IFRS and International Standards on Auditing.</p>
-          <a class="service-link" href="services.html#audit">Learn more →</a>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
-          </div>
-          <h3>Tax Services</h3>
-          <p>Corporate and personal tax registration, preparation and filing of tax returns, tax planning and appeals against tax assessments.</p>
-          <a class="service-link" href="services.html#tax">Learn more →</a>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <h3>Compliance Services</h3>
-          <p>Complete payroll functions for companies and individuals, including Social Insurance registration and administration of payments.</p>
-          <a class="service-link" href="services.html#compliance">Learn more →</a>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
-          </div>
-          <h3>Advisory Services</h3>
-          <p>Business plans, feasibility studies, financial due diligence and valuation reports for the assessment of new ventures and opportunities.</p>
-          <a class="service-link" href="services.html#advisory">Learn more →</a>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5.5 7.5L12 3l6.5 4.5M4 21h16M6 21v-4M18 21v-4M6 12a3 3 0 006 0 3 3 0 006 0"/></svg>
-          </div>
-          <h3>Insolvency Services</h3>
-          <p>Acting as liquidator of companies and as receiver of companies facing financial difficulties, guiding all parties through the process.</p>
-          <a class="service-link" href="services.html#insolvency">Learn more →</a>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b1f2e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 018 0v2M12 13v3"/></svg>
-          </div>
-          <h3>Fiduciary Services</h3>
-          <p>Formation of Cyprus companies, provision of registered office address and trustee services for local and international clients.</p>
-          <a class="service-link" href="services.html#fiduciary">Learn more →</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="background: var(--white);">
-    <div class="container split">
-      <div class="split-visual reveal">
-        <div class="quote">
-          “Our mission is to continuously add value to our clients’ businesses through the highest quality professional services.”
-          <strong>Ekkeshis + Ierodiakonou</strong>
+    <!-- ===== Services ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <p class="section__kicker" data-i18n="services.kicker">What we do</p>
+        <h2 class="section__title" data-i18n="services.title">Services built around your goals</h2>
+        <div class="cards cards--3">
+          <article class="card">
+            <div class="card__icon card__icon--cyan" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+            </div>
+            <h3 data-i18n="services.s1.title">Website design &amp; build</h3>
+            <p data-i18n="services.s1.body">Custom websites designed from scratch around your brand — fast, mobile-first and built to turn visitors into customers.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon card__icon--yellow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h8.9a2 2 0 0 0 2-1.6L22 7H6"/></svg>
+            </div>
+            <h3 data-i18n="services.s2.title">E-commerce &amp; online shops</h3>
+            <p data-i18n="services.s2.body">Online stores with secure payments, easy product management and a checkout flow designed to sell.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon card__icon--cyan" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg>
+            </div>
+            <h3 data-i18n="services.s3.title">Redesigns &amp; maintenance</h3>
+            <p data-i18n="services.s3.body">We modernise outdated websites and keep them running — updates, fixes and improvements, handled for you.</p>
+          </article>
         </div>
       </div>
-      <div class="reveal">
-        <span class="eyebrow">Why Choose Us</span>
-        <h2 class="section-title">An independent firm with big-firm expertise</h2>
-        <p class="section-lead">Based in the centre of Nicosia, our team of qualified, high-calibre professionals — members of leading professional bodies of accountants — brings years of experience to every engagement.</p>
-        <ul class="check-list">
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#c9a24b" opacity="0.18"/><path d="M7 12.5l3.5 3.5L17 9" stroke="#c9a24b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Partner-led engagements.</strong> Direct access to partners trained at leading international firms.</span>
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#c9a24b" opacity="0.18"/><path d="M7 12.5l3.5 3.5L17 9" stroke="#c9a24b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Timely and cost-effective.</strong> Quality professional services delivered efficiently, without unnecessary overheads.</span>
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#c9a24b" opacity="0.18"/><path d="M7 12.5l3.5 3.5L17 9" stroke="#c9a24b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Every size of client.</strong> From sole entrepreneurs and owner-managed businesses to large multinational groups.</span>
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#c9a24b" opacity="0.18"/><path d="M7 12.5l3.5 3.5L17 9" stroke="#c9a24b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Truly independent.</strong> Objective advice with your business interests at the centre of everything we do.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Leadership</span>
-        <h2 class="section-title">Meet the Partners</h2>
-        <p class="section-lead">Chartered accountants with first-class academic credentials and training at leading international firms.</p>
-      </div>
-      <div class="partners-grid">
-        <article class="partner-card reveal">
-          <div class="partner-avatar">CE</div>
-          <div>
-            <h3>Constantinos Ekkeshis</h3>
-            <div class="role">Partner</div>
-            <p>BSc in Mathematics and Computer Science from King’s College London (First Class Honours) and MSc in Finance from Imperial College London. Trained as a Chartered Accountant at PwC, which he joined in 2003. Serves as a non-executive director on the boards of regulated entities.</p>
-          </div>
-        </article>
-        <article class="partner-card reveal">
-          <div class="partner-avatar">CI</div>
-          <div>
-            <h3>Christos Ierodiakonou</h3>
-            <div class="role">Partner</div>
-            <p>BSc in Mathematics and Statistics from Imperial College London (First Class Honours). Trained as a Chartered Accountant at Deloitte, which he joined in 2002. Serves as a non-executive director on the boards of regulated entities.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top: 0;">
-    <div class="container">
-      <div class="cta-band reveal">
-        <div>
-          <h2>Ready to discuss your business needs?</h2>
-          <p>Get in touch with our team in Nicosia for a no-obligation conversation about how we can help.</p>
+    <!-- ===== Portfolio ===== -->
+    <section class="section section--alt" id="work">
+      <div class="container">
+        <p class="section__kicker" data-i18n="work.kicker">Selected work</p>
+        <h2 class="section__title" data-i18n="work.title">Recent projects</h2>
+        <p class="section__note" data-i18n="work.note">Placeholder projects — real case studies coming soon. Follow our Instagram for the latest launches.</p>
+        <div class="cards cards--3 portfolio">
+          <article class="project">
+            <div class="project__thumb project__thumb--1"><span>Aa</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p1.title">Olive &amp; Stone Tavern</h3>
+              <p data-i18n="work.p1.body">Restaurant website with menu, gallery and table booking.</p>
+              <span class="tag" data-i18n="work.p1.tag">Website</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project__thumb project__thumb--2"><span>◇</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p2.title">Kyma Swimwear</h3>
+              <p data-i18n="work.p2.body">Online shop with payments, inventory and Instagram integration.</p>
+              <span class="tag tag--yellow" data-i18n="work.p2.tag">E-commerce</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project__thumb project__thumb--3"><span>▲</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p3.title">Petrides Law</h3>
+              <p data-i18n="work.p3.body">Full redesign of an outdated firm website into a modern, trustworthy presence.</p>
+              <span class="tag" data-i18n="work.p3.tag">Redesign</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project__thumb project__thumb--4"><span>●</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p4.title">FitLab Studio</h3>
+              <p data-i18n="work.p4.body">Gym landing page with class schedule and membership sign-up.</p>
+              <span class="tag" data-i18n="work.p4.tag">Landing page</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project__thumb project__thumb--5"><span>✦</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p5.title">Aegean Villas</h3>
+              <p data-i18n="work.p5.body">Property showcase with photo galleries and direct enquiry flow.</p>
+              <span class="tag tag--yellow" data-i18n="work.p5.tag">Website</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project__thumb project__thumb--6"><span>Nx</span></div>
+            <div class="project__body">
+              <h3 data-i18n="work.p6.title">Your project here</h3>
+              <p data-i18n="work.p6.body">Have an idea? Let's design something your customers will remember.</p>
+              <span class="tag" data-i18n="work.p6.tag">Next up</span>
+            </div>
+          </article>
         </div>
-        <a href="contact.html" class="btn btn-gold">Get in Touch <span class="arrow">→</span></a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <a href="index.html" class="brand">
-          <span class="brand-mark">E+I</span>
-          <span>
-            <span class="brand-name">Ekkeshis + Ierodiakonou</span>
-            <span class="brand-sub">Chartered Accountants</span>
-          </span>
+    <!-- ===== Process ===== -->
+    <section class="section" id="process">
+      <div class="container">
+        <p class="section__kicker" data-i18n="process.kicker">How it works</p>
+        <h2 class="section__title" data-i18n="process.title">From DM to launch in four steps</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">01</span>
+            <h3 data-i18n="process.s1.title">Chat</h3>
+            <p data-i18n="process.s1.body">Message us on Instagram. We learn about your business and what you need.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <h3 data-i18n="process.s2.title">Design</h3>
+            <p data-i18n="process.s2.body">You get a design proposal matched to your brand — we refine it together.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <h3 data-i18n="process.s3.title">Build</h3>
+            <p data-i18n="process.s3.body">We build the site fast, mobile-friendly and ready for Google.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">04</span>
+            <h3 data-i18n="process.s4.title">Launch &amp; support</h3>
+            <p data-i18n="process.s4.body">We go live and stay available for updates and improvements.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section class="section section--alt" id="testimonials">
+      <div class="container">
+        <p class="section__kicker" data-i18n="testimonials.kicker">Kind words</p>
+        <h2 class="section__title" data-i18n="testimonials.title">What clients say</h2>
+        <div class="cards cards--3">
+          <figure class="quote">
+            <blockquote data-i18n="testimonials.t1.body">“Our new website looks incredible and bookings went up within the first month. The whole process was smooth.”</blockquote>
+            <figcaption><strong data-i18n="testimonials.t1.name">Maria K.</strong> <span data-i18n="testimonials.t1.role">Restaurant owner</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote data-i18n="testimonials.t2.body">“They rebuilt our old site into something we're proud to share. Fast, professional and easy to work with.”</blockquote>
+            <figcaption><strong data-i18n="testimonials.t2.name">Andreas P.</strong> <span data-i18n="testimonials.t2.role">Law firm partner</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote data-i18n="testimonials.t3.body">“The online shop paid for itself in weeks. Everything just works, and support is always one message away.”</blockquote>
+            <figcaption><strong data-i18n="testimonials.t3.name">Elena S.</strong> <span data-i18n="testimonials.t3.role">Boutique founder</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact CTA ===== -->
+    <section class="section contact" id="contact">
+      <div class="container contact__inner">
+        <h2 class="contact__title">
+          <span data-i18n="contact.title1">Ready to build something</span>
+          <span class="hero__title-accent" data-i18n="contact.title2">great together?</span>
+        </h2>
+        <p class="contact__sub" data-i18n="contact.sub">Tell us about your project — we reply to every message, usually within a few hours.</p>
+        <a class="btn btn--primary btn--big" href="https://www.instagram.com/nexus_aea" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <span data-i18n="contact.cta">Message @nexus_aea</span>
         </a>
-        <p>An independent provider of quality professional services in Compliance, Audit, Tax, Insolvency and Advisory, based in the centre of Nicosia, Cyprus.</p>
       </div>
-      <div>
-        <h4>Firm</h4>
-        <ul>
-          <li><a href="our-firm.html">Our Firm</a></li>
-          <li><a href="our-firm.html#partners">Our People</a></li>
-          <li><a href="careers.html">Careers</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html#audit">Audit &amp; Assurance</a></li>
-          <li><a href="services.html#tax">Tax</a></li>
-          <li><a href="services.html#compliance">Compliance</a></li>
-          <li><a href="services.html#advisory">Advisory</a></li>
-          <li><a href="services.html#insolvency">Insolvency</a></li>
-          <li><a href="services.html#fiduciary">Fiduciary</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li>39 Themistocles Dervis Street, Office 102<br>CY-1066 Nicosia, Cyprus</li>
-          <li>Tel: <a href="tel:+35722466470">+357 22 466 470</a></li>
-          <li>Fax: +357 22 766 470</li>
-          <li><a href="mailto:info@eicyprus.com">info@eicyprus.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <span>© <span data-year>2026</span> Ekkeshis + Ierodiakonou. All rights reserved.</span>
-      <span>Chartered Accountants · Nicosia, Cyprus</span>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#top" class="nav__logo" aria-label="Back to top">
+        <span class="nav__logo-mark">N</span>
+        <span class="nav__logo-text">Nexus</span>
+      </a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Websites for businesses that want more.</p>
+      <p class="footer__copy"><span data-i18n="footer.copy">© 2026 Nexus. All rights reserved.</span> · <a href="https://www.instagram.com/nexus_aea" target="_blank" rel="noopener">Instagram</a></p>
     </div>
   </footer>
 

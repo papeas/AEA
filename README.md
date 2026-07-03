@@ -1,29 +1,30 @@
-# Ekkeshis + Ierodiakonou — Website Redesign
+# Nexus — Agency Website
 
-A modern redesign of [eicyprus.com](https://eicyprus.com/), the website of Ekkeshis + Ierodiakonou, an independent firm of chartered accountants in Nicosia, Cyprus.
+Bilingual (English / Ελληνικά) one-page website for **Nexus**, the web studio behind
+[@nexus_aea](https://www.instagram.com/nexus_aea) — websites, online shops, redesigns
+and maintenance for businesses.
 
-## Pages
+## Structure
 
-| Page | File |
-| --- | --- |
-| Home | `index.html` |
-| Our Firm | `our-firm.html` |
-| Services | `services.html` |
-| Careers | `careers.html` |
-| Contact Us | `contact.html` |
-
-## Design
-
-- **Palette:** deep navy + warm gold on an off-white background — a refined, trustworthy look for a professional services firm.
-- **Typography:** Playfair Display for headings, Inter for body text (Google Fonts with system fallbacks).
-- **Fully responsive:** mobile navigation drawer, fluid grids, and clamp-based type scaling.
-- **No build step:** plain HTML/CSS/JS — open `index.html` in a browser or serve the folder with any static server.
-- **Self-contained assets:** all icons are inline SVG; no image files required.
-- **Accessible & polished:** scroll-reveal animations respect `prefers-reduced-motion`, semantic markup, keyboard-friendly navigation.
-
-## Local preview
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
 ```
+├── index.html      # The whole site (single page)
+├── css/style.css   # Brand styles — dark base, cyan + light-yellow accents
+└── js/main.js      # EN/ΕΛ language toggle + mobile navigation
+```
+
+No build step, no dependencies — open `index.html` in a browser or host it on any
+static host (GitHub Pages, Netlify, Vercel).
+
+## Customizing
+
+- **Text (both languages):** edit the `translations` object at the top of `js/main.js`.
+  The English strings in `index.html` are the defaults before JavaScript runs.
+- **Portfolio:** the six project cards in the `#work` section are placeholders.
+  Replace the titles/descriptions and swap the gradient `.project__thumb--N` blocks
+  for real screenshots (`<img>`) when case studies are ready.
+- **Testimonials:** placeholders too — swap in real client quotes in `index.html`
+  and `js/main.js`.
+- **Colors:** all brand colors live in the `:root` variables at the top of
+  `css/style.css`.
+- **Contact:** all CTAs point to the Instagram profile; update the `href`s if you
+  add email or WhatsApp later.
