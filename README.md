@@ -7,9 +7,10 @@ and maintenance for businesses.
 ## Structure
 
 ```
-├── index.html      # The whole site (single page)
-├── css/style.css   # Brand styles — dark base, cyan + light-yellow accents
-└── js/main.js      # EN/ΕΛ language toggle + mobile navigation
+├── index.html       # The whole site (single page)
+├── css/style.css    # Brand styles — light theme, logo blue + gold palette
+├── js/main.js       # EN/ΕΛ language toggle + mobile navigation
+└── assets/logo.jpg  # Original Nexus logo (also used as the social share image)
 ```
 
 No build step, no dependencies — open `index.html` in a browser or host it on any
