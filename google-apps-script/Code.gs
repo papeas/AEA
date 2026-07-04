@@ -4,22 +4,29 @@
  * This turns a Google Sheet into the review database for the Nexus site,
  * so no server hosting is needed at all.
  *
- * SETUP (one time, ~5 minutes):
- *  1. Go to https://sheets.google.com and create a new spreadsheet,
- *     name it e.g. "Nexus Reviews".
- *  2. In the sheet: Extensions → Apps Script. Delete any code there and
- *     paste this whole file.
+ * SETUP (one time, ~5 minutes — works on desktop AND iPad/phone):
+ *  1. In a browser (Safari/Chrome), go to https://script.google.com
+ *     and sign in. Tap "New project".
+ *     (On iPad: if the editor looks broken, tap the "aA" icon in the
+ *     address bar and choose "Request Desktop Website".)
+ *  2. Delete the placeholder code and paste this whole file.
  *  3. Change SECRET below to your own private password.
- *  4. Click Deploy → New deployment → type: Web app.
+ *  4. Save, then click Deploy → New deployment → type: Web app.
  *       - Execute as: Me
  *       - Who has access: Anyone
- *     Click Deploy and authorise it.
+ *     Click Deploy and authorise it (if Google warns "unverified app":
+ *     Advanced → Go to project → Allow — it's your own script).
  *  5. Copy the Web app URL (looks like
  *     https://script.google.com/macros/s/XXXXX/exec).
  *  6. Paste that URL into REVIEWS_API at the top of js/main.js and push.
  *  7. Open admin.html, paste the same URL + your SECRET to moderate.
  *
- * Reviews appear as rows in the sheet — you can also edit them right there.
+ * You don't need to create a spreadsheet yourself: on first use the
+ * script creates one called "Nexus Reviews" in your Google Drive and
+ * keeps using it. Reviews appear as rows there — you can edit them
+ * right in the sheet. (Pasting this into an existing sheet via
+ * Extensions → Apps Script on desktop also works; then that sheet
+ * is used instead.)
  */
 
 // ====== settings ======
@@ -30,8 +37,28 @@ var SHEET_NAME = "Reviews";
 
 var HEADERS = ["id", "name", "business", "rating", "text", "approved", "createdAt"];
 
-function sheet_() {
+function ss_() {
+  // bound to a spreadsheet (Extensions → Apps Script)? use that one
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (ss) return ss;
+  // standalone project (script.google.com — the iPad-friendly path):
+  // create our own spreadsheet once and remember its id
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty("SHEET_ID");
+  if (id) {
+    try {
+      return SpreadsheetApp.openById(id);
+    } catch (err) {
+      /* sheet was deleted — fall through and create a new one */
+    }
+  }
+  ss = SpreadsheetApp.create("Nexus Reviews");
+  props.setProperty("SHEET_ID", ss.getId());
+  return ss;
+}
+
+function sheet_() {
+  var ss = ss_();
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
