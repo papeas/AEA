@@ -6,7 +6,7 @@
      "https://script.google.com/macros/s/XXXXX/exec"
    - Node backend (server/server.js): "" = same origin when the site is
      served by it, or the deployed URL, e.g. "https://your-app.onrender.com" */
-const REVIEWS_API = "";
+const REVIEWS_API = "https://script.google.com/macros/s/AKfycbxpdR-zBbmnkC4eoOHroG-KiAMuPvcbY_tbVBlL5pjkWW8DU0LnrO-9FvdsBiuLHAea/exec";
 
 const IS_SHEETS = REVIEWS_API.indexOf("script.google.com") !== -1;
 const REVIEWS_LIST_URL = IS_SHEETS ? REVIEWS_API + "?action=list" : REVIEWS_API + "/api/reviews";
