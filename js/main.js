@@ -1,11 +1,16 @@
-/* Nexus — language toggle (EN/ΕΛ) + mobile nav */
+/* Nexus — language toggle (EN/ΕΛ), mobile nav, reviews, custom cursor */
+
+/* Reviews backend. "" = same origin (works when the site is served by
+   server/server.js). After deploying the backend somewhere public
+   (e.g. Render), put its URL here: "https://your-app.onrender.com" */
+const REVIEWS_API = "";
 
 const translations = {
   en: {
     "nav.services": "Services",
     "nav.work": "Work",
     "nav.process": "How we work",
-    "nav.testimonials": "Clients",
+    "nav.reviews": "Reviews",
     "nav.contact": "Get in touch",
 
     "hero.t1": "We design and build",
@@ -45,16 +50,20 @@ const translations = {
     "process.s4.title": "Stay in touch",
     "process.s4.body": "Need a change later? Text us. Small updates are usually done within days.",
 
-    "testimonials.title": "What clients say",
-    "testimonials.t1.body": "\"The website was ready in three weeks and bookings picked up almost straight away. They explained everything in plain language.\"",
-    "testimonials.t1.name": "Maria K.",
-    "testimonials.t1.role": "restaurant owner",
-    "testimonials.t2.body": "\"Our old site embarrassed us. The new one actually looks like the firm we are. Any time we need a change, it's done in a day or two.\"",
-    "testimonials.t2.name": "Andreas P.",
-    "testimonials.t2.role": "law firm partner",
-    "testimonials.t3.body": "\"I was nervous about running an online shop, but they set it up so I can manage products myself. Orders come in while I sleep.\"",
-    "testimonials.t3.name": "Elena S.",
-    "testimonials.t3.role": "boutique owner",
+    "reviews.title": "Reviews",
+    "reviews.add": "Leave a review",
+    "reviews.empty": "No reviews yet — we're just getting started. Worked with us? We'd love to hear how it went.",
+    "reviews.form.title": "Leave a review",
+    "reviews.form.name": "Your name",
+    "reviews.form.business": "Your business (optional)",
+    "reviews.form.rating": "Rating",
+    "reviews.form.text": "Your review",
+    "reviews.form.cancel": "Cancel",
+    "reviews.form.submit": "Send review",
+    "reviews.msg.thanks": "Thank you! Your review has been sent.",
+    "reviews.msg.invalid": "Please fill in your name and review.",
+    "reviews.msg.rate": "Please wait a minute before sending another review.",
+    "reviews.msg.offline": "Reviews can't be sent right now — message us on Instagram instead.",
 
     "contact.title": "Have a project in mind?",
     "contact.sub": "Tell us what you do and what you need — we reply to every message, usually the same day.",
@@ -67,7 +76,7 @@ const translations = {
     "nav.services": "Υπηρεσίες",
     "nav.work": "Δουλειές",
     "nav.process": "Πώς δουλεύουμε",
-    "nav.testimonials": "Πελάτες",
+    "nav.reviews": "Κριτικές",
     "nav.contact": "Επικοινωνία",
 
     "hero.t1": "Σχεδιάζουμε και φτιάχνουμε",
@@ -107,16 +116,20 @@ const translations = {
     "process.s4.title": "Μένουμε σε επαφή",
     "process.s4.body": "Θες μια αλλαγή αργότερα; Στείλε μας. Οι μικρές αλλαγές γίνονται συνήθως μέσα σε λίγες μέρες.",
 
-    "testimonials.title": "Τι λένε οι πελάτες μας",
-    "testimonials.t1.body": "«Η ιστοσελίδα ήταν έτοιμη σε τρεις εβδομάδες και οι κρατήσεις ανέβηκαν σχεδόν αμέσως. Μας τα εξήγησαν όλα με απλά λόγια.»",
-    "testimonials.t1.name": "Μαρία Κ.",
-    "testimonials.t1.role": "ιδιοκτήτρια εστιατορίου",
-    "testimonials.t2.body": "«Η παλιά μας σελίδα μάς ντρόπιαζε. Η καινούρια δείχνει επιτέλους το γραφείο που είμαστε. Όποτε χρειαστούμε αλλαγή, γίνεται σε μια-δυο μέρες.»",
-    "testimonials.t2.name": "Ανδρέας Π.",
-    "testimonials.t2.role": "συνέταιρος δικηγορικού γραφείου",
-    "testimonials.t3.body": "«Είχα άγχος για το ηλεκτρονικό κατάστημα, αλλά το έστησαν έτσι που διαχειρίζομαι τα προϊόντα μόνη μου. Οι παραγγελίες έρχονται όσο κοιμάμαι.»",
-    "testimonials.t3.name": "Έλενα Σ.",
-    "testimonials.t3.role": "ιδιοκτήτρια boutique",
+    "reviews.title": "Κριτικές",
+    "reviews.add": "Άφησε κριτική",
+    "reviews.empty": "Δεν υπάρχουν κριτικές ακόμα — μόλις ξεκινήσαμε. Δουλέψαμε μαζί; Θα χαρούμε να μάθουμε πώς πήγε.",
+    "reviews.form.title": "Άφησε κριτική",
+    "reviews.form.name": "Το όνομά σου",
+    "reviews.form.business": "Η επιχείρησή σου (προαιρετικό)",
+    "reviews.form.rating": "Βαθμολογία",
+    "reviews.form.text": "Η κριτική σου",
+    "reviews.form.cancel": "Άκυρο",
+    "reviews.form.submit": "Αποστολή",
+    "reviews.msg.thanks": "Ευχαριστούμε! Η κριτική σου στάλθηκε.",
+    "reviews.msg.invalid": "Συμπλήρωσε το όνομα και την κριτική σου.",
+    "reviews.msg.rate": "Περίμενε ένα λεπτό πριν στείλεις άλλη κριτική.",
+    "reviews.msg.offline": "Οι κριτικές δεν μπορούν να σταλούν αυτή τη στιγμή — στείλε μας μήνυμα στο Instagram.",
 
     "contact.title": "Έχεις κάτι στο μυαλό σου;",
     "contact.sub": "Πες μας τι κάνεις και τι χρειάζεσαι — απαντάμε σε κάθε μήνυμα, συνήθως αυθημερόν.",
@@ -161,3 +174,165 @@ navLinks.querySelectorAll("a").forEach((link) => {
     burger.setAttribute("aria-expanded", "false");
   });
 });
+
+/* ============ Reviews ============ */
+const reviewsList = document.getElementById("reviewsList");
+const reviewsEmpty = document.getElementById("reviewsEmpty");
+const reviewModal = document.getElementById("reviewModal");
+const reviewForm = document.getElementById("reviewForm");
+const reviewMsg = document.getElementById("reviewMsg");
+const starPicker = document.getElementById("starPicker");
+let currentRating = 5;
+
+function t(key) {
+  const lang = localStorage.getItem("nexus-lang") || "en";
+  return (translations[lang] || translations.en)[key] || translations.en[key] || key;
+}
+
+function starString(n) {
+  return "★".repeat(n) + "☆".repeat(5 - n);
+}
+
+function renderReviews(reviews) {
+  if (!reviews.length) {
+    reviewsList.hidden = true;
+    reviewsEmpty.hidden = false;
+    return;
+  }
+  reviewsList.textContent = "";
+  reviews.forEach((r) => {
+    const fig = document.createElement("figure");
+    fig.className = "quote";
+
+    const stars = document.createElement("div");
+    stars.className = "quote__stars";
+    stars.textContent = starString(r.rating);
+
+    const quote = document.createElement("blockquote");
+    quote.textContent = r.text;
+
+    const cap = document.createElement("figcaption");
+    const name = document.createElement("strong");
+    name.textContent = r.name;
+    cap.appendChild(name);
+    if (r.business) cap.appendChild(document.createTextNode(" · " + r.business));
+
+    fig.append(stars, quote, cap);
+    reviewsList.appendChild(fig);
+  });
+  reviewsEmpty.hidden = true;
+  reviewsList.hidden = false;
+}
+
+async function loadReviews() {
+  try {
+    const res = await fetch(REVIEWS_API + "/api/reviews");
+    if (!res.ok) throw new Error(res.status);
+    renderReviews(await res.json());
+  } catch {
+    /* no backend reachable (e.g. static hosting) — keep the empty state */
+  }
+}
+loadReviews();
+
+function setRating(n) {
+  currentRating = n;
+  starPicker.querySelectorAll("button").forEach((b) => {
+    b.classList.toggle("on", Number(b.dataset.v) <= n);
+  });
+}
+starPicker.addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-v]");
+  if (btn) setRating(Number(btn.dataset.v));
+});
+
+function openModal() {
+  reviewModal.hidden = false;
+  reviewMsg.hidden = true;
+  setRating(5);
+  reviewForm.reset();
+  reviewForm.querySelector("input[name='name']").focus();
+}
+function closeModal() {
+  reviewModal.hidden = true;
+}
+document.getElementById("addReviewBtn").addEventListener("click", openModal);
+reviewModal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModal));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !reviewModal.hidden) closeModal();
+});
+
+function showMsg(key, ok) {
+  reviewMsg.textContent = t(key);
+  reviewMsg.className = "modal__msg " + (ok ? "modal__msg--ok" : "modal__msg--err");
+  reviewMsg.hidden = false;
+}
+
+reviewForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = new FormData(reviewForm);
+  const payload = {
+    name: (data.get("name") || "").trim(),
+    business: (data.get("business") || "").trim(),
+    rating: currentRating,
+    text: (data.get("text") || "").trim(),
+    website: data.get("website") || ""
+  };
+  if (!payload.name || !payload.text) {
+    showMsg("reviews.msg.invalid", false);
+    return;
+  }
+  const submitBtn = document.getElementById("reviewSubmit");
+  submitBtn.disabled = true;
+  try {
+    const res = await fetch(REVIEWS_API + "/api/reviews", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (res.status === 429) {
+      showMsg("reviews.msg.rate", false);
+      return;
+    }
+    if (!res.ok) throw new Error(res.status);
+    showMsg("reviews.msg.thanks", true);
+    await loadReviews();
+    setTimeout(closeModal, 1600);
+  } catch {
+    showMsg("reviews.msg.offline", false);
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+/* ============ Custom cursor ============ */
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (finePointer && !reducedMotion) {
+  const dot = document.getElementById("cursorDot");
+  const ring = document.getElementById("cursorRing");
+  document.body.classList.add("has-cursor");
+
+  let mouseX = -100, mouseY = -100;
+  let ringX = -100, ringY = -100;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + "px";
+    dot.style.top = mouseY + "px";
+  });
+
+  (function follow() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
+    requestAnimationFrame(follow);
+  })();
+
+  document.addEventListener("mouseover", (e) => {
+    ring.classList.toggle("is-active", Boolean(e.target.closest("a, button, .stars")));
+  });
+}

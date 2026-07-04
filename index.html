@@ -29,7 +29,7 @@
         <a href="#services" data-i18n="nav.services">Services</a>
         <a href="#work" data-i18n="nav.work">Work</a>
         <a href="#process" data-i18n="nav.process">How we work</a>
-        <a href="#testimonials" data-i18n="nav.testimonials">Clients</a>
+        <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
         <a href="#contact" class="btn btn--small btn--primary" data-i18n="nav.contact">Get in touch</a>
       </nav>
       <div class="nav__actions">
@@ -168,24 +168,15 @@
       </div>
     </section>
 
-    <!-- ===== Testimonials ===== -->
-    <section class="section section--tint" id="testimonials">
+    <!-- ===== Reviews ===== -->
+    <section class="section section--tint" id="reviews">
       <div class="container">
-        <h2 class="section__title" data-i18n="testimonials.title">What clients say</h2>
-        <div class="quotes">
-          <figure class="quote">
-            <blockquote data-i18n="testimonials.t1.body">"The website was ready in three weeks and bookings picked up almost straight away. They explained everything in plain language."</blockquote>
-            <figcaption><strong data-i18n="testimonials.t1.name">Maria K.</strong> · <span data-i18n="testimonials.t1.role">restaurant owner</span></figcaption>
-          </figure>
-          <figure class="quote">
-            <blockquote data-i18n="testimonials.t2.body">"Our old site embarrassed us. The new one actually looks like the firm we are. Any time we need a change, it's done in a day or two."</blockquote>
-            <figcaption><strong data-i18n="testimonials.t2.name">Andreas P.</strong> · <span data-i18n="testimonials.t2.role">law firm partner</span></figcaption>
-          </figure>
-          <figure class="quote">
-            <blockquote data-i18n="testimonials.t3.body">"I was nervous about running an online shop, but they set it up so I can manage products myself. Orders come in while I sleep."</blockquote>
-            <figcaption><strong data-i18n="testimonials.t3.name">Elena S.</strong> · <span data-i18n="testimonials.t3.role">boutique owner</span></figcaption>
-          </figure>
+        <div class="reviews__head">
+          <h2 class="section__title" data-i18n="reviews.title">Reviews</h2>
+          <button type="button" class="btn btn--primary" id="addReviewBtn" data-i18n="reviews.add">Leave a review</button>
         </div>
+        <div class="quotes" id="reviewsList" hidden></div>
+        <p class="reviews__empty" id="reviewsEmpty" data-i18n="reviews.empty">No reviews yet — we're just getting started. Worked with us? We'd love to hear how it went.</p>
       </div>
     </section>
 
@@ -214,6 +205,47 @@
       <p class="footer__copy"><span data-i18n="footer.copy">© 2026 Nexus · Cyprus</span> · <a href="https://www.instagram.com/nexus_aea" target="_blank" rel="noopener">Instagram</a></p>
     </div>
   </footer>
+
+  <!-- ===== Review modal ===== -->
+  <div class="modal" id="reviewModal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <form class="modal__card" id="reviewForm" novalidate>
+      <h3 data-i18n="reviews.form.title">Leave a review</h3>
+      <label class="field">
+        <span data-i18n="reviews.form.name">Your name</span>
+        <input type="text" name="name" maxlength="60" required>
+      </label>
+      <label class="field">
+        <span data-i18n="reviews.form.business">Your business (optional)</span>
+        <input type="text" name="business" maxlength="80">
+      </label>
+      <div class="field">
+        <span data-i18n="reviews.form.rating">Rating</span>
+        <div class="stars" id="starPicker" role="radiogroup" aria-label="Rating">
+          <button type="button" data-v="1" aria-label="1 star">★</button>
+          <button type="button" data-v="2" aria-label="2 stars">★</button>
+          <button type="button" data-v="3" aria-label="3 stars">★</button>
+          <button type="button" data-v="4" aria-label="4 stars">★</button>
+          <button type="button" data-v="5" aria-label="5 stars">★</button>
+        </div>
+      </div>
+      <label class="field">
+        <span data-i18n="reviews.form.text">Your review</span>
+        <textarea name="text" rows="4" maxlength="600" required></textarea>
+      </label>
+      <!-- honeypot: real people never see or fill this -->
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="modal__msg" id="reviewMsg" hidden></p>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--ghost" data-close data-i18n="reviews.form.cancel">Cancel</button>
+        <button type="submit" class="btn btn--primary" id="reviewSubmit" data-i18n="reviews.form.submit">Send review</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===== Custom cursor ===== -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
   <script src="js/main.js"></script>
 </body>
