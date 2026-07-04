@@ -19,24 +19,38 @@ static host (GitHub Pages, Netlify, Vercel).
 
 ## Reviews
 
-Visitors can leave a review via the "Leave a review" button. Reviews are stored
-by the small backend in `server/`:
+Visitors can leave a review via the "Leave a review" button. Two backend
+options — pick one and put its URL in the `REVIEWS_API` constant at the top of
+`js/main.js`:
+
+### Option A — Google Sheets (recommended: free, no hosting)
+
+Reviews are stored as rows in a Google Sheet you own. Follow the step-by-step
+setup at the top of [`google-apps-script/Code.gs`](google-apps-script/Code.gs)
+(~5 minutes: create a sheet, paste the script, set your `SECRET`, deploy as a
+web app, copy the URL into `REVIEWS_API`).
+
+### Option B — Node backend
 
 ```
 node server/server.js        # serves the site + reviews API on :3000
 ```
 
-- Reviews publish immediately by default. Set `MODERATE=1` to hold them for
-  approval, and `ADMIN_TOKEN=<secret>` to enable the admin endpoints
-  (`/api/admin/reviews?token=…`, `/api/admin/approve`, `/api/admin/delete`).
-- Data is saved to `server/reviews-data.json` (gitignored).
+- Set `MODERATE=1` to hold new reviews for approval, `ADMIN_TOKEN=<secret>` to
+  enable the admin endpoints. Data is saved to `server/reviews-data.json`
+  (gitignored).
+- For production, deploy to any free Node host (Render, Railway, Fly.io —
+  start command `node server/server.js`) and use that URL as `REVIEWS_API`.
 
-**Important:** GitHub Pages only serves static files, so on the live Pages site
-the reviews section shows its empty state and submissions fail gracefully with
-a "message us on Instagram" hint. To make reviews work in production, deploy
-`server/server.js` to any free Node host (Render, Railway, Fly.io — the whole
-repo, start command `node server/server.js`) and put the deployed URL in the
-`REVIEWS_API` constant at the top of `js/main.js`.
+### Moderating — admin page
+
+Open **`admin.html`** (on the live site or locally), enter your backend URL and
+secret, and you can see pending reviews, approve them, or delete any review.
+The page holds no secrets itself, so it's safe to host publicly.
+
+**Note:** GitHub Pages only serves static files. Until `REVIEWS_API` points at
+one of the two backends above, the live reviews section shows its empty state
+and submissions fail gracefully with a "message us on Instagram" hint.
 
 ## Customizing
 

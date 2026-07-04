@@ -1,9 +1,16 @@
 /* Nexus — language toggle (EN/ΕΛ), mobile nav, reviews, custom cursor */
 
-/* Reviews backend. "" = same origin (works when the site is served by
-   server/server.js). After deploying the backend somewhere public
-   (e.g. Render), put its URL here: "https://your-app.onrender.com" */
+/* Reviews backend. Two options:
+   - Google Sheets (recommended, free, no hosting): follow the setup in
+     google-apps-script/Code.gs, then paste the Web app URL here, e.g.
+     "https://script.google.com/macros/s/XXXXX/exec"
+   - Node backend (server/server.js): "" = same origin when the site is
+     served by it, or the deployed URL, e.g. "https://your-app.onrender.com" */
 const REVIEWS_API = "";
+
+const IS_SHEETS = REVIEWS_API.indexOf("script.google.com") !== -1;
+const REVIEWS_LIST_URL = IS_SHEETS ? REVIEWS_API + "?action=list" : REVIEWS_API + "/api/reviews";
+const REVIEWS_POST_URL = IS_SHEETS ? REVIEWS_API : REVIEWS_API + "/api/reviews";
 
 const translations = {
   en: {
@@ -61,6 +68,7 @@ const translations = {
     "reviews.form.cancel": "Cancel",
     "reviews.form.submit": "Send review",
     "reviews.msg.thanks": "Thank you! Your review has been sent.",
+    "reviews.msg.pending": "Thank you! Your review will appear once it's approved.",
     "reviews.msg.invalid": "Please fill in your name and review.",
     "reviews.msg.rate": "Please wait a minute before sending another review.",
     "reviews.msg.offline": "Reviews can't be sent right now — message us on Instagram instead.",
@@ -127,6 +135,7 @@ const translations = {
     "reviews.form.cancel": "Άκυρο",
     "reviews.form.submit": "Αποστολή",
     "reviews.msg.thanks": "Ευχαριστούμε! Η κριτική σου στάλθηκε.",
+    "reviews.msg.pending": "Ευχαριστούμε! Η κριτική σου θα εμφανιστεί μόλις εγκριθεί.",
     "reviews.msg.invalid": "Συμπλήρωσε το όνομα και την κριτική σου.",
     "reviews.msg.rate": "Περίμενε ένα λεπτό πριν στείλεις άλλη κριτική.",
     "reviews.msg.offline": "Οι κριτικές δεν μπορούν να σταλούν αυτή τη στιγμή — στείλε μας μήνυμα στο Instagram.",
@@ -226,9 +235,10 @@ function renderReviews(reviews) {
 
 async function loadReviews() {
   try {
-    const res = await fetch(REVIEWS_API + "/api/reviews");
+    const res = await fetch(REVIEWS_LIST_URL);
     if (!res.ok) throw new Error(res.status);
-    renderReviews(await res.json());
+    const data = await res.json();
+    if (Array.isArray(data)) renderReviews(data);
   } catch {
     /* no backend reachable (e.g. static hosting) — keep the empty state */
   }
@@ -285,9 +295,11 @@ reviewForm.addEventListener("submit", async (e) => {
   const submitBtn = document.getElementById("reviewSubmit");
   submitBtn.disabled = true;
   try {
-    const res = await fetch(REVIEWS_API + "/api/reviews", {
+    /* text/plain avoids a CORS preflight, which Google Apps Script
+       cannot answer; the Node backend parses the body either way */
+    const res = await fetch(REVIEWS_POST_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
     if (res.status === 429) {
@@ -295,9 +307,11 @@ reviewForm.addEventListener("submit", async (e) => {
       return;
     }
     if (!res.ok) throw new Error(res.status);
-    showMsg("reviews.msg.thanks", true);
+    const out = await res.json().catch(() => ({}));
+    if (out.error) throw new Error(out.error);
+    showMsg(out.pending ? "reviews.msg.pending" : "reviews.msg.thanks", true);
     await loadReviews();
-    setTimeout(closeModal, 1600);
+    setTimeout(closeModal, 2000);
   } catch {
     showMsg("reviews.msg.offline", false);
   } finally {
