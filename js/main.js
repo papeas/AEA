@@ -17,6 +17,7 @@ const translations = {
     "nav.services": "Services",
     "nav.work": "Work",
     "nav.process": "How we work",
+    "nav.plans": "Plans",
     "nav.reviews": "Reviews",
     "nav.contact": "Get in touch",
 
@@ -57,6 +58,35 @@ const translations = {
     "process.s4.title": "Stay in touch",
     "process.s4.body": "Need a change later? Text us. Small updates are usually done within days.",
 
+    "plans.title": "Our services",
+    "plans.note": "Three simple packages — every project gets an exact quote up front, with no surprises later.",
+    "plans.cta": "Get started",
+    "plans.basic.name": "Basic",
+    "plans.basic.price": "from €350",
+    "plans.basic.tag": "Get your business online fast.",
+    "plans.basic.f1": "One-page website",
+    "plans.basic.f2": "Mobile-friendly design",
+    "plans.basic.f3": "Instagram & contact links",
+    "plans.basic.f4": "Basic Google/SEO setup",
+    "plans.basic.f5": "Live in about a week",
+    "plans.premium.badge": "Most popular",
+    "plans.premium.name": "Premium",
+    "plans.premium.price": "from €750",
+    "plans.premium.tag": "A complete website, built around your brand.",
+    "plans.premium.f1": "Up to 5 pages, custom design",
+    "plans.premium.f2": "English & Greek",
+    "plans.premium.f3": "Contact & booking forms",
+    "plans.premium.f4": "Google Maps & SEO setup",
+    "plans.premium.f5": "1 month of support included",
+    "plans.ultra.name": "Ultra",
+    "plans.ultra.price": "from €1,500",
+    "plans.ultra.tag": "Online shop or fully custom project.",
+    "plans.ultra.f1": "E-commerce with card payments",
+    "plans.ultra.f2": "Product setup & training",
+    "plans.ultra.f3": "Customer reviews system",
+    "plans.ultra.f4": "English & Greek",
+    "plans.ultra.f5": "3 months of priority support",
+
     "reviews.title": "Reviews",
     "reviews.add": "Leave a review",
     "reviews.empty": "No reviews yet — we're just getting started. Worked with us? We'd love to hear how it went.",
@@ -84,6 +114,7 @@ const translations = {
     "nav.services": "Υπηρεσίες",
     "nav.work": "Δουλειές",
     "nav.process": "Πώς δουλεύουμε",
+    "nav.plans": "Πακέτα",
     "nav.reviews": "Κριτικές",
     "nav.contact": "Επικοινωνία",
 
@@ -123,6 +154,35 @@ const translations = {
     "process.s3.body": "Χτίζουμε τη σελίδα, τη δοκιμάζουμε σε πραγματικά κινητά και τη βγάζουμε live. Τα περισσότερα έργα θέλουν δύο με τέσσερις εβδομάδες.",
     "process.s4.title": "Μένουμε σε επαφή",
     "process.s4.body": "Θες μια αλλαγή αργότερα; Στείλε μας. Οι μικρές αλλαγές γίνονται συνήθως μέσα σε λίγες μέρες.",
+
+    "plans.title": "Οι υπηρεσίες μας",
+    "plans.note": "Τρία απλά πακέτα — κάθε έργο παίρνει ακριβή προσφορά από την αρχή, χωρίς εκπλήξεις μετά.",
+    "plans.cta": "Ξεκίνα",
+    "plans.basic.name": "Basic",
+    "plans.basic.price": "από €350",
+    "plans.basic.tag": "Βγάλε την επιχείρησή σου online γρήγορα.",
+    "plans.basic.f1": "Ιστοσελίδα μίας σελίδας",
+    "plans.basic.f2": "Φιλική για κινητά",
+    "plans.basic.f3": "Σύνδεση Instagram & επικοινωνίας",
+    "plans.basic.f4": "Βασικό στήσιμο Google/SEO",
+    "plans.basic.f5": "Live σε περίπου μία εβδομάδα",
+    "plans.premium.badge": "Δημοφιλέστερο",
+    "plans.premium.name": "Premium",
+    "plans.premium.price": "από €750",
+    "plans.premium.tag": "Ολοκληρωμένη ιστοσελίδα, χτισμένη γύρω από το brand σου.",
+    "plans.premium.f1": "Έως 5 σελίδες, custom σχεδιασμός",
+    "plans.premium.f2": "Αγγλικά & Ελληνικά",
+    "plans.premium.f3": "Φόρμες επικοινωνίας & κρατήσεων",
+    "plans.premium.f4": "Στήσιμο Google Maps & SEO",
+    "plans.premium.f5": "1 μήνας υποστήριξη",
+    "plans.ultra.name": "Ultra",
+    "plans.ultra.price": "από €1.500",
+    "plans.ultra.tag": "Ηλεκτρονικό κατάστημα ή πλήρως custom έργο.",
+    "plans.ultra.f1": "E-commerce με πληρωμές κάρτας",
+    "plans.ultra.f2": "Στήσιμο προϊόντων & εκπαίδευση",
+    "plans.ultra.f3": "Σύστημα κριτικών πελατών",
+    "plans.ultra.f4": "Αγγλικά & Ελληνικά",
+    "plans.ultra.f5": "3 μήνες προτεραιότητα στην υποστήριξη",
 
     "reviews.title": "Κριτικές",
     "reviews.add": "Άφησε κριτική",
@@ -318,6 +378,32 @@ reviewForm.addEventListener("submit", async (e) => {
     submitBtn.disabled = false;
   }
 });
+
+/* ============ Reveal on scroll ============ */
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const targets = document.querySelectorAll(
+    ".service, .project, .step, .plan, .quote, .section__title, .hero__tile"
+  );
+  targets.forEach((el) => {
+    el.classList.add("reveal");
+    /* stagger siblings so grids cascade in */
+    const i = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.setProperty("--reveal-delay", (i % 4) * 90 + "ms");
+  });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  targets.forEach((el) => observer.observe(el));
+})();
 
 /* ============ Custom cursor ============ */
 const finePointer = window.matchMedia("(pointer: fine)").matches;
