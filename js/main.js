@@ -218,6 +218,7 @@ function setLanguage(lang) {
   const label = document.querySelector("[data-lang-label]");
   if (label) label.textContent = lang === "el" ? "EN" : "ΕΛ";
   localStorage.setItem("nexus-lang", lang);
+  window.dispatchEvent(new CustomEvent("nexus:lang"));
 }
 
 const savedLang = localStorage.getItem("nexus-lang") || "en";
@@ -246,12 +247,15 @@ navLinks.querySelectorAll("a").forEach((link) => {
 
 /* ============ Reviews ============ */
 const reviewsList = document.getElementById("reviewsList");
+const reviewsMarquee = document.getElementById("reviewsMarquee");
 const reviewsEmpty = document.getElementById("reviewsEmpty");
 const reviewModal = document.getElementById("reviewModal");
 const reviewForm = document.getElementById("reviewForm");
 const reviewMsg = document.getElementById("reviewMsg");
 const starPicker = document.getElementById("starPicker");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let currentRating = 5;
+let reviewsCount = 0;
 
 function t(key) {
   const lang = localStorage.getItem("nexus-lang") || "en";
@@ -262,36 +266,61 @@ function starString(n) {
   return "★".repeat(n) + "☆".repeat(5 - n);
 }
 
+function buildQuote(r) {
+  const fig = document.createElement("figure");
+  fig.className = "quote";
+
+  const stars = document.createElement("div");
+  stars.className = "quote__stars";
+  stars.textContent = starString(r.rating);
+
+  const quote = document.createElement("blockquote");
+  quote.textContent = r.text;
+
+  const cap = document.createElement("figcaption");
+  const name = document.createElement("strong");
+  name.textContent = r.name;
+  cap.appendChild(name);
+  if (r.business) cap.appendChild(document.createTextNode(" · " + r.business));
+
+  fig.append(stars, quote, cap);
+  return fig;
+}
+
+/* size the marquee so it loops seamlessly at a steady speed */
+function measureMarquee() {
+  if (reduceMotion || !reviewsCount) return;
+  const kids = reviewsList.children;
+  if (kids.length < reviewsCount + 1) return;
+  const shift = kids[reviewsCount].offsetLeft - kids[0].offsetLeft;
+  if (shift <= 0) return;
+  reviewsList.style.setProperty("--marquee-shift", "-" + shift + "px");
+  reviewsList.style.setProperty("--marquee-duration", Math.max(14, shift / 60) + "s");
+}
+
 function renderReviews(reviews) {
   if (!reviews.length) {
-    reviewsList.hidden = true;
+    reviewsMarquee.hidden = true;
     reviewsEmpty.hidden = false;
     return;
   }
   reviewsList.textContent = "";
-  reviews.forEach((r) => {
-    const fig = document.createElement("figure");
-    fig.className = "quote";
-
-    const stars = document.createElement("div");
-    stars.className = "quote__stars";
-    stars.textContent = starString(r.rating);
-
-    const quote = document.createElement("blockquote");
-    quote.textContent = r.text;
-
-    const cap = document.createElement("figcaption");
-    const name = document.createElement("strong");
-    name.textContent = r.name;
-    cap.appendChild(name);
-    if (r.business) cap.appendChild(document.createTextNode(" · " + r.business));
-
-    fig.append(stars, quote, cap);
-    reviewsList.appendChild(fig);
-  });
+  reviews.forEach((r) => reviewsList.appendChild(buildQuote(r)));
+  reviewsCount = reviews.length;
+  /* duplicate the set once so the horizontal loop is seamless */
+  if (!reduceMotion) {
+    reviews.forEach((r) => {
+      const clone = buildQuote(r);
+      clone.setAttribute("aria-hidden", "true");
+      reviewsList.appendChild(clone);
+    });
+  }
   reviewsEmpty.hidden = true;
-  reviewsList.hidden = false;
+  reviewsMarquee.hidden = false;
+  requestAnimationFrame(measureMarquee);
 }
+
+window.addEventListener("resize", () => requestAnimationFrame(measureMarquee));
 
 async function loadReviews() {
   try {
@@ -403,6 +432,42 @@ reviewForm.addEventListener("submit", async (e) => {
     { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
   );
   targets.forEach((el) => observer.observe(el));
+})();
+
+/* ============ Scroll progress + section dots ============ */
+(function () {
+  const bar = document.getElementById("scrollProgress");
+  const dots = Array.prototype.slice.call(document.querySelectorAll(".dots__dot"));
+  const sections = dots
+    .map((d) => document.querySelector(d.getAttribute("href")))
+    .filter(Boolean);
+
+  const navLinksByHash = {};
+  document.querySelectorAll(".nav__links a[href^='#']").forEach((a) => {
+    navLinksByHash[a.getAttribute("href")] = a;
+  });
+  function labelDots() {
+    dots.forEach((d) => {
+      const link = navLinksByHash[d.getAttribute("href")];
+      if (link) d.setAttribute("data-label", link.textContent.trim());
+    });
+  }
+  labelDots();
+  window.addEventListener("nexus:lang", labelDots);
+
+  function onScroll() {
+    const scrolled = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = "scaleX(" + (docH > 0 ? Math.min(scrolled / docH, 1) : 0) + ")";
+    let active = 0;
+    sections.forEach((sec, i) => {
+      if (sec.getBoundingClientRect().top <= window.innerHeight * 0.35) active = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === active));
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
 })();
 
 /* ============ Custom cursor ============ */

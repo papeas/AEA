@@ -16,6 +16,9 @@
 </head>
 <body>
 
+  <!-- ===== Scroll progress ===== -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- ===== Navigation ===== -->
   <header class="nav" id="top">
     <div class="container nav__inner">
@@ -226,7 +229,9 @@
           <h2 class="section__title" data-i18n="reviews.title">Reviews</h2>
           <button type="button" class="btn btn--primary" id="addReviewBtn" data-i18n="reviews.add">Leave a review</button>
         </div>
-        <div class="quotes" id="reviewsList" hidden></div>
+        <div class="reviews__marquee" id="reviewsMarquee" hidden>
+          <div class="reviews__track" id="reviewsList"></div>
+        </div>
         <p class="reviews__empty" id="reviewsEmpty" data-i18n="reviews.empty">No reviews yet — we're just getting started. Worked with us? We'd love to hear how it went.</p>
       </div>
     </section>
@@ -293,6 +298,16 @@
       </div>
     </form>
   </div>
+
+  <!-- ===== Section dot navigation ===== -->
+  <nav class="dots" id="sectionDots" aria-label="Jump to section">
+    <a href="#services" class="dots__dot"><b></b></a>
+    <a href="#work" class="dots__dot"><b></b></a>
+    <a href="#process" class="dots__dot"><b></b></a>
+    <a href="#plans" class="dots__dot"><b></b></a>
+    <a href="#reviews" class="dots__dot"><b></b></a>
+    <a href="#contact" class="dots__dot"><b></b></a>
+  </nav>
 
   <!-- ===== Custom cursor ===== -->
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
