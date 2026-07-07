@@ -437,12 +437,32 @@
   .about-more { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
   .about-more .kicker.sec { margin-bottom: 2rem; }
   .values {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    position: relative;
+    display: flex;
+    gap: 1.6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
-  @media (max-width: 820px) { .values { grid-template-columns: 1fr; gap: 2.4rem; } }
-  .value { padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .values::-webkit-scrollbar { display: none; }
+  .value {
+    flex: 0 0 min(420px, 85%);
+    scroll-snap-align: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  /* scroll bullets */
+  .values-nav { display: flex; gap: 0.55rem; margin-top: 1.7rem; }
+  .values-nav button {
+    width: 26px; height: 7px; padding: 0;
+    border: none; border-radius: 100px; cursor: pointer;
+    background: var(--line);
+    transition: background 0.35s ease, width 0.35s ease;
+  }
+  .values-nav button:hover { background: var(--ink-soft); }
+  .values-nav button.active { background: var(--grad); width: 42px; }
   .value-mark {
     display: block;
     width: 34px; height: 3px; border-radius: 3px;
