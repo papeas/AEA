@@ -85,3 +85,28 @@
     document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
     document.addEventListener('mouseenter', () => { dot.style.opacity = ''; ring.style.opacity = ''; });
   }
+
+  // ---- Scroll reveals (robust: content can never stay hidden) ----
+  (function () {
+    let els = Array.from(document.querySelectorAll('.reveal'));
+    if (!els.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach((el) => el.classList.add('in'));
+      return;
+    }
+    const reveal = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      els = els.filter((el) => {
+        // reveal once the element's top crosses the trigger line — including
+        // elements already scrolled past (top < 0), so fast scrolls never skip one
+        if (el.getBoundingClientRect().top < vh * 0.9) { el.classList.add('in'); return false; }
+        return true;
+      });
+    };
+    reveal();
+    window.addEventListener('scroll', () => requestAnimationFrame(reveal), { passive: true });
+    window.addEventListener('resize', () => requestAnimationFrame(reveal), { passive: true });
+    window.addEventListener('load', reveal);
+    // absolute fallback — guarantee everything is visible even if the above misses
+    setTimeout(() => els.forEach((el) => el.classList.add('in')), 4000);
+  })();
