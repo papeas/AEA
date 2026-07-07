@@ -192,6 +192,7 @@
 
   /* ---------- Hamburger ---------- */
   .hamburger {
+    display: block;
     position: relative;
     width: 42px; height: 42px;
     border: 1.5px solid var(--line);
@@ -260,14 +261,7 @@
   .menu.open .menu-meta { opacity: 1; transform: none; }
   .menu-meta a:hover { color: var(--pink); }
 
-  @media (max-width: 860px) {
-    .hamburger { display: block; }
-    .nav-links a.plain { display: none; }
-  }
-  @media (min-width: 861px) {
-    .hamburger { display: none; }
-  }
-  @media (max-width: 520px) {
+  @media (max-width: 380px) {
     .nav-links .nav-cta { display: none; }
   }
 
