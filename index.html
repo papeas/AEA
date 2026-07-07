@@ -11,139 +11,163 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="blobs" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<div class="blobs" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="wrap">
+  <nav id="nav">
+    <a href="#top" class="brand"><span class="dot"></span>Nexus</a>
+    <div class="nav-links">
+      <a href="#about" class="plain">About</a>
+      <a href="#services" class="plain">Services</a>
+      <a href="#work" class="plain">Work</a>
+      <a href="#contact" class="nav-cta">Let's talk</a>
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <a href="#about" class="menu-link">About</a>
+    <a href="#services" class="menu-link">Services</a>
+    <a href="#work" class="menu-link">Work</a>
+    <a href="#contact" class="menu-link">Contact</a>
+    <div class="menu-meta">
+      <a href="mailto:hello@nexus.studio">hello@nexus.studio</a>
+      <span>Nexus Studio · Est. 2024</span>
+    </div>
   </div>
 
-  <div class="wrap">
-    <nav id="nav">
-      <a href="#top" class="brand"><span class="dot"></span>Nexus</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#contact" class="nav-cta">Let's talk</a>
+  <header class="hero" id="top">
+    <div>
+      <span class="kicker">Digital studio · Est. 2024</span>
+      <h1>We build<br />websites that<br /><span class="gradient">move.</span></h1>
+      <p class="hero-sub">Nexus is a small studio crafting bold, high-energy digital experiences for ambitious brands.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">See our work</a>
+        <a href="#contact" class="btn btn-ghost">Start a project</a>
       </div>
-    </nav>
+      <div class="scroll-hint"><span class="line"></span> Scroll to explore</div>
+    </div>
+  </header>
 
-    <header class="hero" id="top">
-      <div>
-        <span class="kicker">Digital studio · Est. 2024</span>
-        <h1>We build<br />websites that<br /><span class="gradient">move.</span></h1>
-        <p class="hero-sub">Nexus is a small studio crafting bold, high-energy digital experiences for ambitious brands.</p>
-        <div class="hero-actions">
-          <a href="#work" class="btn btn-primary">See our work</a>
-          <a href="#contact" class="btn btn-ghost">Start a project</a>
-        </div>
-        <div class="scroll-hint"><span class="line"></span> Scroll to explore</div>
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about">
+        <span class="kicker sec reveal">Who we are</span>
+        <h2 class="reveal d1">A tiny team with<br />outsized ambition.</h2>
+        <p class="lead reveal d2">We're a compact studio of designers and developers who believe great websites aren't just seen — they're felt. Every project is a chance to blend sharp design, clean code, and a little bit of magic.</p>
+        <p class="reveal d3" style="color:var(--ink-soft)">No bloated teams, no endless meetings. Just focused people making fast, beautiful things for clients who want to stand out.</p>
       </div>
-    </header>
-
-    <section id="about">
-      <div class="container about-grid">
-        <div class="about">
-          <span class="kicker sec reveal">Who we are</span>
-          <h2 class="reveal d1">A tiny team with<br />outsized ambition.</h2>
-          <p class="lead reveal d2">We're a compact studio of designers and developers who believe great websites aren't just seen — they're felt. Every project is a chance to blend sharp design, clean code, and a little bit of magic.</p>
-          <p class="reveal d3" style="color:var(--ink-soft)">No bloated teams, no endless meetings. Just focused people making fast, beautiful things for clients who want to stand out.</p>
-        </div>
-        <div class="stats">
-          <div class="stat reveal"><div class="num">50+</div><div class="label">Projects shipped</div></div>
-          <div class="stat reveal d1"><div class="num">4wk</div><div class="label">Avg. turnaround</div></div>
-          <div class="stat reveal d2"><div class="num">100%</div><div class="label">Custom built</div></div>
-          <div class="stat reveal d3"><div class="num">∞</div><div class="label">Passion</div></div>
-        </div>
+      <div class="stats">
+        <div class="stat reveal"><div class="num">50+</div><div class="label">Projects shipped</div></div>
+        <div class="stat reveal d1"><div class="num">4wk</div><div class="label">Avg. turnaround</div></div>
+        <div class="stat reveal d2"><div class="num">100%</div><div class="label">Custom built</div></div>
+        <div class="stat reveal d3"><div class="num">∞</div><div class="label">Passion</div></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker sec reveal">What we do</span>
-          <h2 class="reveal d1">Three things,<br />done exceptionally.</h2>
-        </div>
-        <div class="cards">
-          <article class="card reveal">
-            <span class="card-num">01</span>
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 18v3M16 18v3M5 21h14"/></svg>
-            </div>
-            <h3>Web Design</h3>
-            <p>Distinctive, on-brand interfaces designed to make people stop scrolling. Wireframes to pixel-perfect visuals.</p>
-          </article>
-          <article class="card reveal d1">
-            <span class="card-num">02</span>
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>
-            </div>
-            <h3>Development</h3>
-            <p>Fast, accessible, and rock-solid builds. Modern stacks, silky animations, and code that ages gracefully.</p>
-          </article>
-          <article class="card reveal d2">
-            <span class="card-num">03</span>
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="16" cy="16" r="2.5"/><path d="M11 8L8.5 10.5M15 14l-6-1.5"/></svg>
-            </div>
-            <h3>Branding</h3>
-            <p>Identity systems with personality — logos, palettes, and voice that make small brands feel unforgettable.</p>
-          </article>
-        </div>
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker sec reveal">What we do</span>
+        <h2 class="reveal d1">Three things,<br />done exceptionally.</h2>
       </div>
-    </section>
-
-    <section id="work">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker sec reveal">Selected work</span>
-          <h2 class="reveal d1">A few things<br />we're proud of.</h2>
-        </div>
-        <div class="work-grid">
-          <div class="work-item reveal">
-            <div class="thumb g1"></div>
-            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-            <div class="overlay"><span class="tag">E-commerce</span><h3>Bloom &amp; Co.</h3></div>
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card-role">Web Design</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 18v3M16 18v3M5 21h14"/></svg>
           </div>
-          <div class="work-item reveal d1">
-            <div class="thumb g2"></div>
-            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-            <div class="overlay"><span class="tag">SaaS</span><h3>Driftboard</h3></div>
+          <h3>Web Design</h3>
+          <p>Distinctive, on-brand interfaces designed to make people stop scrolling. Wireframes to pixel-perfect visuals.</p>
+        </article>
+        <article class="card reveal d1">
+          <span class="card-role">Development</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>
           </div>
-          <div class="work-item reveal d1">
-            <div class="thumb g3"></div>
-            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-            <div class="overlay"><span class="tag">Portfolio</span><h3>Studio Vega</h3></div>
+          <h3>Development</h3>
+          <p>Fast, accessible, and rock-solid builds. Modern stacks, silky animations, and code that ages gracefully.</p>
+        </article>
+        <article class="card reveal d2">
+          <span class="card-role">Branding</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#gp3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gp3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="16" cy="16" r="2.5"/><path d="M11 8L8.5 10.5M15 14l-6-1.5"/></svg>
           </div>
-          <div class="work-item reveal d2">
-            <div class="thumb g4"></div>
-            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-            <div class="overlay"><span class="tag">Launch</span><h3>Orbit Labs</h3></div>
-          </div>
-        </div>
+          <h3>Branding</h3>
+          <p>Identity systems with personality — logos, palettes, and voice that make small brands feel unforgettable.</p>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact">
-      <div class="container">
-        <div class="cta-box reveal">
-          <h2>Let's build<br />something bold.</h2>
-          <p>Got a project in mind? We'd love to hear about it.</p>
-          <a href="mailto:hello@nexus.studio" class="btn btn-white">hello@nexus.studio</a>
-        </div>
+  <section id="work">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker sec reveal">Selected work</span>
+        <h2 class="reveal d1">A few things<br />we're proud of.</h2>
       </div>
-    </section>
+      <div class="work-grid">
+        <a class="work-item reveal" href="#contact" aria-label="Bloom &amp; Co. — e-commerce project">
+          <div class="thumb g1"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">E-commerce</span><h3>Bloom &amp; Co.</h3></div>
+        </a>
+        <a class="work-item reveal d1" href="#contact" aria-label="Driftboard — SaaS project">
+          <div class="thumb g2"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">SaaS</span><h3>Driftboard</h3></div>
+        </a>
+        <a class="work-item reveal d1" href="#contact" aria-label="Studio Vega — portfolio project">
+          <div class="thumb g3"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">Portfolio</span><h3>Studio Vega</h3></div>
+        </a>
+        <a class="work-item reveal d2" href="#contact" aria-label="Orbit Labs — launch project">
+          <div class="thumb g4"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">Launch</span><h3>Orbit Labs</h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <div class="brand" style="font-size:1.15rem"><span class="dot"></span>Nexus</div>
-      <div class="footer-social">
-        <a href="#top">Twitter</a>
-        <a href="#top">Instagram</a>
-        <a href="#top">Dribbble</a>
+  <section id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Let's build<br />something bold.</h2>
+        <p>Got a project in mind? We'd love to hear about it.</p>
+        <a href="mailto:hello@nexus.studio" class="btn btn-white">hello@nexus.studio</a>
       </div>
-      <div>© 2024 Nexus Studio</div>
-    </footer>
-  </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand" style="font-size:1.15rem"><span class="dot"></span>Nexus</div>
+    <div class="footer-social">
+      <a href="#top">Twitter</a>
+      <a href="#top">Instagram</a>
+      <a href="#top">Dribbble</a>
+    </div>
+    <div>© 2024 Nexus Studio</div>
+  </footer>
+</div>
+
 
   <script src="js/main.js"></script>
 </body>
