@@ -29,7 +29,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
   // ---- Active section highlight (scroll-spy) ----
-  const spySections = ['about', 'services', 'work', 'contact']
+  const spySections = ['about', 'services', 'work', 'reviews', 'contact']
     .map((id) => document.getElementById(id)).filter(Boolean);
   if ('IntersectionObserver' in window) {
     const spy = new IntersectionObserver((entries) => {
