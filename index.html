@@ -7,7 +7,7 @@
   <meta name="description" content="Nexus is a small studio crafting bold, high-energy websites for ambitious clients. Web design, development, and branding." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -140,26 +140,43 @@
         <span class="kicker sec reveal">Selected work</span>
         <h2 class="reveal d1">A few things<br />we're proud of.</h2>
       </div>
+      <div class="work-filters reveal d2" role="group" aria-label="Filter work by category">
+        <button class="chip active" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="ecommerce" aria-pressed="false">E-commerce</button>
+        <button class="chip" data-filter="saas" aria-pressed="false">SaaS</button>
+        <button class="chip" data-filter="portfolio" aria-pressed="false">Portfolio</button>
+        <button class="chip" data-filter="launch" aria-pressed="false">Launch</button>
+      </div>
       <div class="work-grid">
-        <a class="work-item reveal" href="#contact" aria-label="Bloom &amp; Co. — e-commerce project">
+        <a class="work-item reveal" data-cat="ecommerce" href="#contact" aria-label="Bloom &amp; Co. — e-commerce project">
           <div class="thumb g1"></div>
           <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
           <div class="overlay"><span class="tag">E-commerce</span><h3>Bloom &amp; Co.</h3></div>
         </a>
-        <a class="work-item reveal d1" href="#contact" aria-label="Driftboard — SaaS project">
+        <a class="work-item reveal d1" data-cat="saas" href="#contact" aria-label="Driftboard — SaaS project">
           <div class="thumb g2"></div>
           <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
           <div class="overlay"><span class="tag">SaaS</span><h3>Driftboard</h3></div>
         </a>
-        <a class="work-item reveal d1" href="#contact" aria-label="Studio Vega — portfolio project">
+        <a class="work-item reveal d1" data-cat="portfolio" href="#contact" aria-label="Studio Vega — portfolio project">
           <div class="thumb g3"></div>
           <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
           <div class="overlay"><span class="tag">Portfolio</span><h3>Studio Vega</h3></div>
         </a>
-        <a class="work-item reveal d2" href="#contact" aria-label="Orbit Labs — launch project">
+        <a class="work-item reveal d2" data-cat="launch" href="#contact" aria-label="Orbit Labs — launch project">
           <div class="thumb g4"></div>
           <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
           <div class="overlay"><span class="tag">Launch</span><h3>Orbit Labs</h3></div>
+        </a>
+        <a class="work-item reveal" data-cat="ecommerce" href="#contact" aria-label="Coast Supply — e-commerce project">
+          <div class="thumb g4"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">E-commerce</span><h3>Coast Supply</h3></div>
+        </a>
+        <a class="work-item reveal d1" data-cat="saas" href="#contact" aria-label="Pulse Analytics — SaaS project">
+          <div class="thumb g3"></div>
+          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          <div class="overlay"><span class="tag">SaaS</span><h3>Pulse Analytics</h3></div>
         </a>
       </div>
     </div>

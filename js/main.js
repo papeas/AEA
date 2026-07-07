@@ -24,8 +24,40 @@
     menu.setAttribute('aria-hidden', open ? 'false' : 'true');
   };
   hamburger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
-  menu.querySelectorAll('.menu-link').forEach((l) => l.addEventListener('click', () => setMenu(false)));
+  const menuLinks = Array.from(menu.querySelectorAll('.menu-link'));
+  menuLinks.forEach((l) => l.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  // ---- Active section highlight (scroll-spy) ----
+  const spySections = ['about', 'services', 'work', 'contact']
+    .map((id) => document.getElementById(id)).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          menuLinks.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    spySections.forEach((s) => spy.observe(s));
+  }
+
+  // ---- Portfolio category filter ----
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  const workItems = Array.from(document.querySelectorAll('.work-item'));
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+      chip.classList.add('active');
+      chip.setAttribute('aria-pressed', 'true');
+      const f = chip.dataset.filter;
+      workItems.forEach((it) => {
+        const show = f === 'all' || it.dataset.cat === f;
+        it.classList.toggle('is-hidden', !show);
+        if (show) { it.style.animation = 'none'; void it.offsetWidth; it.style.animation = ''; }
+      });
+    });
+  });
 
   // ---- Custom cursor (fine pointers only) ----
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
