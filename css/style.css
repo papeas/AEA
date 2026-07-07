@@ -86,6 +86,32 @@
     background: color-mix(in srgb, var(--pink) 14%, transparent);
   }
 
+  /* ---------- Breathing aurora halo ----------
+     Technique adapted from the 21st.dev "Animated Gradient Background"
+     component (breathing top-centered radial gradient), recolored to brand. */
+  .aurora {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(120% 120% at 50% 14%,
+      transparent 30%,
+      color-mix(in srgb, var(--pink) 60%, transparent) 52%,
+      color-mix(in srgb, var(--blue) 55%, transparent) 74%,
+      transparent 92%);
+    filter: blur(40px) saturate(1.25);
+    transform-origin: 50% 14%;
+    opacity: 0.15;
+    animation: breathe 9s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.13; }
+    50% { transform: scale(1.06); opacity: 0.2; }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .aurora { opacity: 0.28; }
+  }
+  :root[data-theme="dark"] .aurora { opacity: 0.28; }
+  :root[data-theme="light"] .aurora { opacity: 0.15; }
+
   /* ---------- Moving gradient blobs ---------- */
   .blobs {
     position: fixed;
