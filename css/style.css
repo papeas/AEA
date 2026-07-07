@@ -436,33 +436,41 @@
 
   .about-more { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
   .about-more .kicker.sec { margin-bottom: 2rem; }
+  .values-wrap { display: flex; gap: 1.5rem; align-items: stretch; }
   .values {
     position: relative;
+    flex: 1;
+    min-width: 0;
     display: flex;
-    gap: 1.6rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 0.5rem;
+    flex-direction: column;
+    gap: 1.4rem;
+    overflow-y: auto;
+    max-height: clamp(240px, 42vh, 330px);
+    scroll-snap-type: y mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
+    mask-image: linear-gradient(180deg, #000 80%, transparent);
   }
   .values::-webkit-scrollbar { display: none; }
   .value {
-    flex: 0 0 min(420px, 85%);
     scroll-snap-align: start;
-    padding-top: 1.5rem;
+    padding-top: 1.4rem;
     border-top: 1px solid var(--line);
   }
-  /* scroll bullets */
-  .values-nav { display: flex; gap: 0.55rem; margin-top: 1.7rem; }
+  /* vertical scroll bullets (side rail) */
+  .values-nav {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 0.55rem; flex: 0 0 auto;
+  }
   .values-nav button {
-    width: 26px; height: 7px; padding: 0;
+    width: 7px; height: 26px; padding: 0;
     border: none; border-radius: 100px; cursor: pointer;
     background: var(--line);
-    transition: background 0.35s ease, width 0.35s ease;
+    transition: background 0.35s ease, height 0.35s ease;
   }
   .values-nav button:hover { background: var(--ink-soft); }
-  .values-nav button.active { background: var(--grad); width: 42px; }
+  .values-nav button.active { background: var(--grad); height: 44px; }
   .value-mark {
     display: block;
     width: 34px; height: 3px; border-radius: 3px;

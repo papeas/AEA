@@ -50,16 +50,16 @@
     const items = Array.from(strip.querySelectorAll('.value'));
     const dots = Array.from(nav.querySelectorAll('button'));
     dots.forEach((dot, i) => dot.addEventListener('click', () => {
-      strip.scrollTo({ left: items[i].offsetLeft, behavior: 'smooth' });
+      strip.scrollTo({ top: items[i].offsetTop, behavior: 'smooth' });
     }));
     const update = () => {
       let idx = 0, best = Infinity;
       items.forEach((it, i) => {
-        const d = Math.abs(it.offsetLeft - strip.scrollLeft);
+        const d = Math.abs(it.offsetTop - strip.scrollTop);
         if (d < best) { best = d; idx = i; }
       });
-      // snap the last dot on when scrolled to the very end (wide cards may never left-align)
-      if (strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4) idx = items.length - 1;
+      // snap the last dot on when scrolled to the very bottom
+      if (strip.scrollTop + strip.clientHeight >= strip.scrollHeight - 4) idx = items.length - 1;
       dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
     };
     strip.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
