@@ -4,9 +4,18 @@ A bold, single-page marketing site for **Nexus**, a small studio that builds
 websites for clients. Design inspired by [landonorris.com](https://landonorris.com):
 full-screen hero, scroll-triggered reveals, and high-energy motion.
 
+## Structure
+
+```
+nexus/
+├── index.html      # markup
+├── css/style.css   # styles, animations, responsive rules
+└── js/main.js      # scroll reveals + nav-on-scroll
+```
+
 ## Highlights
 
-- **Single self-contained file** — `index.html` with inline CSS + JS, no build step.
+- **Plain HTML/CSS/JS** — no build step; open `index.html` or serve the folder.
 - **Brand colors** — pink (`#ff2e93`) → blue (`#2e6bff`) gradients used across the
   hero accent, buttons, hover states, and a moving background blob.
 - **Sections** — full-screen hero, about (with stats), 3 service cards
