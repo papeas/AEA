@@ -129,15 +129,16 @@ function initBackground() {
   resize();
   window.addEventListener("resize", resize, { passive: true });
 
-  const palette = ["#ff2e93", "#2e6bff", "#7b2ff7", "#ff6ec4", "#4facfe"];
+  // pink ↔ blue only, large soft blobs for a smooth liquid flow
+  const palette = ["#ff2e93", "#ff6ec4", "#2e6bff", "#4facfe"];
   const orbs = palette.map((color, i) => ({
     color,
-    bx: 0.2 + (i / palette.length) * 0.6,
-    by: 0.25 + ((i * 0.37) % 1) * 0.5,
-    r: 0.42 + (i % 3) * 0.12,
+    bx: 0.18 + (i / palette.length) * 0.64,
+    by: 0.30 + ((i * 0.41) % 1) * 0.42,
+    r: 0.55 + (i % 2) * 0.14,
     px: Math.random() * Math.PI * 2,
     py: Math.random() * Math.PI * 2,
-    sp: 0.00005 + Math.random() * 0.00006
+    sp: 0.00003 + Math.random() * 0.000025
   }));
 
   let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5;
@@ -160,11 +161,12 @@ function initBackground() {
     ctx.globalCompositeOperation = "lighter";
     const base = Math.min(W, H);
     for (const o of orbs) {
-      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.16 + (mx - 0.5) * 0.05) * W;
-      const cy = (o.by + Math.cos(t * o.sp * 1.15 + o.py) * 0.16 + (my - 0.5) * 0.05) * H;
+      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.15 + (mx - 0.5) * 0.045) * W;
+      const cy = (o.by + Math.cos(t * o.sp * 1.12 + o.py) * 0.15 + (my - 0.5) * 0.045) * H;
       const rad = o.r * base;
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
-      g.addColorStop(0, rgba(o.color, 0.5));
+      g.addColorStop(0, rgba(o.color, 0.42));
+      g.addColorStop(0.5, rgba(o.color, 0.16));
       g.addColorStop(1, rgba(o.color, 0));
       ctx.fillStyle = g;
       ctx.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
