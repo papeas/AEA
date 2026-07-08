@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "tagline": "Nexus is a small studio crafting bold, high-energy digital experiences for ambitious brands."
+  },
+  "about": {
+    "story": "Founded in 2026, Nexus was born from a simple frustration: too many small businesses get handed the same tired templates. We do the opposite — every site is designed from a blank page, around your story, your goals, and the people you're trying to reach. No bloated teams, no endless meetings. Just focused people making fast, beautiful things."
+  },
+  "contact": {
+    "dm": "https://ig.me/m/nexus_aea",
+    "instagram": "https://www.instagram.com/nexus_aea?igsh=aW5jZGtiejl5bTRi",
+    "tiktok": "https://www.tiktok.com/@nexus_aea?_r=1&_t=ZN-97qbXWTNPzK"
+  },
+  "projects": [
+    { "title": "Bloom & Co.", "tag": "E-commerce", "cat": "ecommerce", "color": "linear-gradient(135deg, #ff2e93, #ff8f5e)", "image": "" },
+    { "title": "Driftboard", "tag": "SaaS", "cat": "saas", "color": "linear-gradient(135deg, #2e6bff, #4facfe)", "image": "" },
+    { "title": "Studio Vega", "tag": "Portfolio", "cat": "portfolio", "color": "linear-gradient(135deg, #7b2ff7, #ff2e93)", "image": "" },
+    { "title": "Orbit Labs", "tag": "Launch", "cat": "launch", "color": "linear-gradient(135deg, #2e6bff, #ff2e93)", "image": "" },
+    { "title": "Coast Supply", "tag": "E-commerce", "cat": "ecommerce", "color": "linear-gradient(135deg, #2e6bff, #ff2e93)", "image": "" },
+    { "title": "Pulse Analytics", "tag": "SaaS", "cat": "saas", "color": "linear-gradient(135deg, #7b2ff7, #ff2e93)", "image": "" }
+  ],
+  "reviews": [
+    { "initials": "MC", "name": "Maya Chen", "role": "Founder, Bloom & Co.", "quote": "Nexus turned a vague idea into a site that actually converts. Sharp, fast, and genuinely fun to work with." },
+    { "initials": "DO", "name": "David Okafor", "role": "CEO, Driftboard", "quote": "The best agency experience we've had. They shipped in three weeks what others quoted three months for." },
+    { "initials": "SM", "name": "Sofia Marín", "role": "Marketing Lead, Orbit Labs", "quote": "Our traffic doubled after launch. The whole site just feels alive — people notice it." },
+    { "initials": "PN", "name": "Priya Nair", "role": "CTO, Pulse Analytics", "quote": "Clean code, beautiful design, zero drama. We're already planning the next project with them." },
+    { "initials": "TW", "name": "Tom Whitfield", "role": "Owner, Coast Supply", "quote": "Coast Supply has never looked better — sales are up and the whole team is thrilled." }
+  ]
+}

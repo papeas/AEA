@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
 </head>
 <body>
 
@@ -45,7 +45,7 @@
     <a href="#reviews" class="menu-link">Reviews</a>
     <a href="#contact" class="menu-link">Contact</a>
     <div class="menu-meta">
-      <a href="https://ig.me/m/nexus_aea" target="_blank" rel="noopener">Contact us</a>
+      <a id="menuContact" href="https://ig.me/m/nexus_aea" target="_blank" rel="noopener">Contact us</a>
       <span>Nexus · Est. 2026</span>
     </div>
   </div>
@@ -54,7 +54,7 @@
     <div>
       <span class="kicker">Digital studio · Est. 2026</span>
       <h1>We build<br />websites that<br /><span class="gradient">move.</span></h1>
-      <p class="hero-sub">Nexus is a small studio crafting bold, high-energy digital experiences for ambitious brands.</p>
+      <p class="hero-sub" id="heroTagline">Nexus is a small studio crafting bold, high-energy digital experiences for ambitious brands.</p>
       <div class="hero-actions">
         <a href="#work" class="btn btn-primary">See our work</a>
         <a href="#contact" class="btn btn-ghost">Start a project</a>
@@ -69,7 +69,7 @@
         <span class="kicker sec reveal">Who we are</span>
         <h2 class="reveal d1">A tiny team with<br />outsized ambition.</h2>
         <p class="lead reveal d2">We're a compact studio of designers and developers who believe great websites aren't just seen — they're felt. Every project is a chance to blend sharp design, clean code, and a little bit of magic.</p>
-        <p class="reveal d3" style="color:var(--ink-soft)">Founded in 2026, Nexus was born from a simple frustration: too many small businesses get handed the same tired templates. We do the opposite — every site is designed from a blank page, around your story, your goals, and the people you're trying to reach. No bloated teams, no endless meetings. Just focused people making fast, beautiful things.</p>
+        <p class="reveal d3" id="aboutStory" style="color:var(--ink-soft)">Founded in 2026, Nexus was born from a simple frustration: too many small businesses get handed the same tired templates. We do the opposite — every site is designed from a blank page, around your story, your goals, and the people you're trying to reach. No bloated teams, no endless meetings. Just focused people making fast, beautiful things.</p>
       </div>
       <div class="stats">
         <div class="stat reveal"><div class="num">50+</div><div class="label">Projects shipped</div></div>
@@ -156,38 +156,7 @@
         <button class="chip" data-filter="portfolio" aria-pressed="false">Portfolio</button>
         <button class="chip" data-filter="launch" aria-pressed="false">Launch</button>
       </div>
-      <div class="work-grid">
-        <a class="work-item reveal" data-cat="ecommerce" href="#contact" aria-label="Bloom &amp; Co. — e-commerce project">
-          <div class="thumb g1"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">E-commerce</span><h3>Bloom &amp; Co.</h3></div>
-        </a>
-        <a class="work-item reveal d1" data-cat="saas" href="#contact" aria-label="Driftboard — SaaS project">
-          <div class="thumb g2"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">SaaS</span><h3>Driftboard</h3></div>
-        </a>
-        <a class="work-item reveal d1" data-cat="portfolio" href="#contact" aria-label="Studio Vega — portfolio project">
-          <div class="thumb g3"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">Portfolio</span><h3>Studio Vega</h3></div>
-        </a>
-        <a class="work-item reveal d2" data-cat="launch" href="#contact" aria-label="Orbit Labs — launch project">
-          <div class="thumb g4"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">Launch</span><h3>Orbit Labs</h3></div>
-        </a>
-        <a class="work-item reveal" data-cat="ecommerce" href="#contact" aria-label="Coast Supply — e-commerce project">
-          <div class="thumb g4"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">E-commerce</span><h3>Coast Supply</h3></div>
-        </a>
-        <a class="work-item reveal d1" data-cat="saas" href="#contact" aria-label="Pulse Analytics — SaaS project">
-          <div class="thumb g3"></div>
-          <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-          <div class="overlay"><span class="tag">SaaS</span><h3>Pulse Analytics</h3></div>
-        </a>
-      </div>
+      <div class="work-grid" id="workGrid"><!-- filled from content.json by js/main.js --></div>
     </div>
   </section>
 
@@ -198,80 +167,7 @@
     </div>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2e93"/><stop offset="1" stop-color="#2e6bff"/></linearGradient></defs></svg>
     <div class="reviews-marquee reveal d1">
-      <div class="reviews-track">
-        <!-- set 1 -->
-        <figure class="review-card">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Nexus turned a vague idea into a site that actually converts. Sharp, fast, and genuinely fun to work with."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">MC</span><span><span class="review-name">Maya Chen</span><br /><span class="review-role">Founder, Bloom &amp; Co.</span></span></figcaption>
-        </figure>
-        <figure class="review-card">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"The best agency experience we've had. They shipped in three weeks what others quoted three months for."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">DO</span><span><span class="review-name">David Okafor</span><br /><span class="review-role">CEO, Driftboard</span></span></figcaption>
-        </figure>
-        <figure class="review-card">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Our traffic doubled after launch. The whole site just feels alive — people notice it."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">SM</span><span><span class="review-name">Sofia Marín</span><br /><span class="review-role">Marketing Lead, Orbit Labs</span></span></figcaption>
-        </figure>
-        <figure class="review-card">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Clean code, beautiful design, zero drama. We're already planning the next project with them."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">PN</span><span><span class="review-name">Priya Nair</span><br /><span class="review-role">CTO, Pulse Analytics</span></span></figcaption>
-        </figure>
-        <figure class="review-card">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Coast Supply has never looked better — sales are up and the whole team is thrilled."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">TW</span><span><span class="review-name">Tom Whitfield</span><br /><span class="review-role">Owner, Coast Supply</span></span></figcaption>
-        </figure>
-        <!-- set 2 (duplicate for seamless loop) -->
-        <figure class="review-card review-dup" aria-hidden="true">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Nexus turned a vague idea into a site that actually converts. Sharp, fast, and genuinely fun to work with."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">MC</span><span><span class="review-name">Maya Chen</span><br /><span class="review-role">Founder, Bloom &amp; Co.</span></span></figcaption>
-        </figure>
-        <figure class="review-card review-dup" aria-hidden="true">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"The best agency experience we've had. They shipped in three weeks what others quoted three months for."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">DO</span><span><span class="review-name">David Okafor</span><br /><span class="review-role">CEO, Driftboard</span></span></figcaption>
-        </figure>
-        <figure class="review-card review-dup" aria-hidden="true">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Our traffic doubled after launch. The whole site just feels alive — people notice it."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">SM</span><span><span class="review-name">Sofia Marín</span><br /><span class="review-role">Marketing Lead, Orbit Labs</span></span></figcaption>
-        </figure>
-        <figure class="review-card review-dup" aria-hidden="true">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Clean code, beautiful design, zero drama. We're already planning the next project with them."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">PN</span><span><span class="review-name">Priya Nair</span><br /><span class="review-role">CTO, Pulse Analytics</span></span></figcaption>
-        </figure>
-        <figure class="review-card review-dup" aria-hidden="true">
-          <div class="review-stars">
-            <svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="url(#starGrad)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote class="review-quote">"Coast Supply has never looked better — sales are up and the whole team is thrilled."</blockquote>
-          <figcaption class="review-author"><span class="review-avatar">TW</span><span><span class="review-name">Tom Whitfield</span><br /><span class="review-role">Owner, Coast Supply</span></span></figcaption>
-        </figure>
-      </div>
+      <div class="reviews-track" id="reviewsTrack"><!-- filled from content.json by js/main.js --></div>
     </div>
   </section>
 
@@ -280,7 +176,7 @@
       <div class="cta-box reveal">
         <h2>Let's build<br />something bold.</h2>
         <p>Got a project in mind? We'd love to hear about it.</p>
-        <a href="https://ig.me/m/nexus_aea" target="_blank" rel="noopener" class="btn btn-white">Contact us!</a>
+        <a id="contactCta" href="https://ig.me/m/nexus_aea" target="_blank" rel="noopener" class="btn btn-white">Contact us!</a>
       </div>
     </div>
   </section>
@@ -288,18 +184,18 @@
   <footer>
     <div class="brand" style="font-size:1.15rem"><span class="dot"></span>Nexus</div>
     <div class="footer-social">
-      <a href="https://www.instagram.com/nexus_aea?igsh=aW5jZGtiejl5bTRi" target="_blank" rel="noopener" aria-label="Nexus on Instagram">
+      <a id="socialInstagram" href="https://www.instagram.com/nexus_aea?igsh=aW5jZGtiejl5bTRi" target="_blank" rel="noopener" aria-label="Nexus on Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a href="https://www.tiktok.com/@nexus_aea?_r=1&amp;_t=ZN-97qbXWTNPzK" target="_blank" rel="noopener" aria-label="Nexus on TikTok">
+      <a id="socialTiktok" href="https://www.tiktok.com/@nexus_aea?_r=1&amp;_t=ZN-97qbXWTNPzK" target="_blank" rel="noopener" aria-label="Nexus on TikTok">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.32 2.06 1.5 3.58 3.5 3.86v2.4c-1.28.12-2.48-.28-3.6-1v5.9c0 3.28-2.42 5.84-5.62 5.84-2.9 0-5.18-2.12-5.18-5.02 0-3.02 2.5-5.02 5.4-4.7v2.62c-.4-.12-.82-.16-1.24-.1-1.06.16-1.86.98-1.78 2.18.08 1.12.98 1.94 2.1 1.94 1.28 0 2.16-1 2.16-2.42V3h2.06z"/></svg>
       </a>
     </div>
-    <div>© 2026 Nexus</div>
+    <div>© 2026 Nexus · <a href="admin.html" style="color:inherit;text-decoration:underline;text-underline-offset:2px;opacity:0.55">Admin</a></div>
   </footer>
 </div>
 
 
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Nexus — Admin</title>
+  <style>
+    :root {
+      --pink: #ff2e93; --blue: #2e6bff;
+      --bg: #0b0c1a; --panel: #14162a; --panel-2: #1c1e36;
+      --ink: #f4f5ff; --ink-soft: #9a9db5; --line: rgba(255,255,255,.12);
+      --grad: linear-gradient(120deg, var(--pink), var(--blue));
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--ink); line-height: 1.5;
+      min-height: 100vh; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--pink); }
+    h1, h2, h3, .logo { font-family: "Space Grotesk", system-ui, sans-serif; letter-spacing: -0.02em; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
+
+    /* login */
+    .login { min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; }
+    .login-card { width: min(400px, 100%); background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 2.2rem; }
+    .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: 1.4rem; }
+    .logo .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--grad); }
+    .muted { color: var(--ink-soft); font-size: .9rem; }
+
+    label { display: block; font-size: .82rem; color: var(--ink-soft); margin: 0 0 .35rem; font-weight: 600; }
+    input, textarea, select {
+      width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+      border-radius: 10px; padding: .7rem .8rem; font: inherit; font-size: .95rem;
+    }
+    textarea { resize: vertical; min-height: 84px; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid var(--pink); outline-offset: 1px; border-color: transparent; }
+    .field { margin-bottom: 1rem; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+
+    .btn { border: none; border-radius: 100px; padding: .7rem 1.4rem; font: inherit; font-weight: 600; cursor: pointer; font-size: .95rem; }
+    .btn-primary { background: var(--grad); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+    .btn-ghost:hover { border-color: var(--pink); }
+    .btn-danger { background: transparent; color: #ff6b6b; border: 1.5px solid rgba(255,107,107,.4); }
+    .btn:disabled { opacity: .5; cursor: default; }
+
+    header.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+    header.bar .actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+    .note { background: rgba(255,46,147,.08); border: 1px solid rgba(255,46,147,.25); border-radius: 12px; padding: .9rem 1rem; font-size: .88rem; color: var(--ink-soft); margin-bottom: 1.6rem; }
+    .note strong { color: var(--ink); }
+
+    section.block { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem 1.4rem 1.5rem; margin-bottom: 1.3rem; }
+    section.block > h2 { font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+    section.block > h2::before { content: ""; width: 22px; height: 3px; border-radius: 3px; background: var(--grad); }
+
+    .item { background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; margin-bottom: .9rem; position: relative; }
+    .item .item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .7rem; }
+    .item .item-head span { font-size: .8rem; color: var(--ink-soft); font-weight: 600; }
+    .remove { background: transparent; border: none; color: #ff6b6b; cursor: pointer; font-size: .82rem; font-weight: 600; }
+    .add { background: transparent; border: 1.5px dashed var(--line); color: var(--ink-soft); border-radius: 10px; padding: .6rem; width: 100%; cursor: pointer; font: inherit; font-weight: 600; }
+    .add:hover { border-color: var(--pink); color: var(--ink); }
+
+    .swatch { width: 100%; height: 30px; border-radius: 8px; margin-top: .4rem; border: 1px solid var(--line); }
+
+    .savebar { position: sticky; bottom: 0; background: linear-gradient(transparent, var(--bg) 30%); padding: 1.2rem 0 .3rem; display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; }
+    .toast { position: fixed; left: 50%; bottom: 1.4rem; transform: translateX(-50%) translateY(2rem); background: var(--grad); color: #fff; padding: .7rem 1.3rem; border-radius: 100px; font-weight: 600; opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .err { color: #ff6b6b; font-size: .85rem; margin-top: .5rem; min-height: 1.2em; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <!-- ===== Login ===== -->
+  <div class="login" id="loginView">
+    <form class="login-card" id="loginForm">
+      <div class="logo"><span class="dot"></span>Nexus Admin</div>
+      <p class="muted" style="margin-bottom:1.3rem">Enter the password to manage the site.</p>
+      <div class="field">
+        <label for="pw">Password</label>
+        <input type="password" id="pw" autocomplete="current-password" autofocus />
+      </div>
+      <button class="btn btn-primary" type="submit" style="width:100%">Unlock</button>
+      <div class="err" id="loginErr"></div>
+    </form>
+  </div>
+
+  <!-- ===== Editor ===== -->
+  <div class="wrap hidden" id="editorView">
+    <header class="bar">
+      <div class="logo"><span class="dot"></span>Nexus Admin</div>
+      <div class="actions">
+        <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener" style="text-decoration:none">Open site ↗</a>
+        <button class="btn btn-ghost" id="logoutBtn" type="button">Log out</button>
+      </div>
+    </header>
+
+    <div class="note">
+      <strong>How saving works.</strong> <b>Save</b> stores your changes in this browser so you can preview them on the site right away.
+      To publish them for <em>everyone</em>, click <b>Download content.json</b> and replace that file in the repository (drag-and-drop on GitHub works).
+      This password is a light gate on a static site — it keeps casual visitors out, but isn't strong security.
+    </div>
+
+    <!-- Hero + About -->
+    <section class="block">
+      <h2>Hero &amp; About</h2>
+      <div class="field">
+        <label for="heroTagline">Hero tagline</label>
+        <textarea id="heroTagline"></textarea>
+      </div>
+      <div class="field">
+        <label for="aboutStory">About story</label>
+        <textarea id="aboutStory" style="min-height:120px"></textarea>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="block">
+      <h2>Contact links</h2>
+      <div class="field"><label for="cDm">"Contact us" button → link (Instagram DM)</label><input id="cDm" type="url" /></div>
+      <div class="row">
+        <div class="field"><label for="cInsta">Instagram profile</label><input id="cInsta" type="url" /></div>
+        <div class="field"><label for="cTiktok">TikTok profile</label><input id="cTiktok" type="url" /></div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="block">
+      <h2>Projects (Work)</h2>
+      <div id="projectsList"></div>
+      <button class="add" id="addProject" type="button">+ Add project</button>
+    </section>
+
+    <!-- Reviews -->
+    <section class="block">
+      <h2>Reviews</h2>
+      <div id="reviewsList"></div>
+      <button class="add" id="addReview" type="button">+ Add review</button>
+    </section>
+
+    <div class="savebar">
+      <button class="btn btn-primary" id="saveBtn" type="button">Save (preview on site)</button>
+      <button class="btn btn-ghost" id="exportBtn" type="button">Download content.json</button>
+      <label class="btn btn-ghost" style="cursor:pointer">Import JSON<input type="file" id="importFile" accept="application/json,.json" class="hidden" /></label>
+      <button class="btn btn-danger" id="resetBtn" type="button" title="Clear this browser's saved edits">Reset edits</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- config ----
+    var PW_HASH = "ff0a5f39b703f6d02441f3b42aa02af28bc400cd8193ffd8fb1f4c4d245444c5"; // sha256("nexus2026")
+    var STORAGE_KEY = "nexus_content";
+    var SESSION_KEY = "nexus_admin_ok";
+    var CATS = ["ecommerce", "saas", "portfolio", "launch"];
+
+    var DEFAULTS = {
+      hero: { tagline: "" }, about: { story: "" },
+      contact: { dm: "", instagram: "", tiktok: "" },
+      projects: [], reviews: []
+    };
+
+    function deepMerge(base, over) {
+      var out = Array.isArray(base) ? base.slice() : Object.assign({}, base);
+      for (var k in over) {
+        var v = over[k];
+        if (v && typeof v === "object" && !Array.isArray(v) && base[k] && typeof base[k] === "object" && !Array.isArray(base[k])) {
+          out[k] = deepMerge(base[k], v);
+        } else { out[k] = v; }
+      }
+      return out;
+    }
+
+    async function sha256(str) {
+      var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+    }
+
+    var $ = function (id) { return document.getElementById(id); };
+    function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 2200); }
+
+    // ---- login ----
+    $("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var val = $("pw").value;
+      var ok = (await sha256(val)) === PW_HASH;
+      if (ok) { sessionStorage.setItem(SESSION_KEY, "1"); showEditor(); }
+      else { $("loginErr").textContent = "Wrong password."; $("pw").select(); }
+    });
+
+    if (sessionStorage.getItem(SESSION_KEY) === "1") showEditor();
+
+    $("logoutBtn") && $("logoutBtn").addEventListener("click", function () {
+      sessionStorage.removeItem(SESSION_KEY); location.reload();
+    });
+
+    // ---- editor ----
+    var content = null;
+
+    async function showEditor() {
+      $("loginView").classList.add("hidden");
+      $("editorView").classList.remove("hidden");
+      content = await loadContent();
+      fillForm(content);
+    }
+
+    async function loadContent() {
+      var data = JSON.parse(JSON.stringify(DEFAULTS));
+      try { var res = await fetch("content.json", { cache: "no-store" }); if (res.ok) data = deepMerge(data, await res.json()); } catch (e) {}
+      try { var ls = localStorage.getItem(STORAGE_KEY); if (ls) data = deepMerge(data, JSON.parse(ls)); } catch (e) {}
+      return data;
+    }
+
+    function fillForm(c) {
+      $("heroTagline").value = c.hero.tagline || "";
+      $("aboutStory").value = c.about.story || "";
+      $("cDm").value = c.contact.dm || "";
+      $("cInsta").value = c.contact.instagram || "";
+      $("cTiktok").value = c.contact.tiktok || "";
+      renderProjectRows(c.projects || []);
+      renderReviewRows(c.reviews || []);
+    }
+
+    // projects
+    function projectRow(p, i) {
+      p = p || { title: "", tag: "", cat: "ecommerce", color: "linear-gradient(135deg, #ff2e93, #2e6bff)", image: "" };
+      var opts = CATS.map(function (cat) { return '<option value="' + cat + '"' + (p.cat === cat ? " selected" : "") + ">" + cat + "</option>"; }).join("");
+      var el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML =
+        '<div class="item-head"><span>Project ' + (i + 1) + '</span><button class="remove" type="button">Remove</button></div>' +
+        '<div class="row"><div class="field"><label>Title</label><input class="p-title" value="" /></div>' +
+        '<div class="field"><label>Tag (label shown)</label><input class="p-tag" value="" /></div></div>' +
+        '<div class="row"><div class="field"><label>Category (for filter)</label><select class="p-cat">' + opts + '</select></div>' +
+        '<div class="field"><label>Background color (CSS)</label><input class="p-color" value="" /><div class="swatch"></div></div></div>' +
+        '<div class="field"><label>Image URL (optional — overrides color)</label><input class="p-image" value="" /></div>';
+      el.querySelector(".p-title").value = p.title || "";
+      el.querySelector(".p-tag").value = p.tag || "";
+      el.querySelector(".p-color").value = p.color || "";
+      el.querySelector(".p-image").value = p.image || "";
+      var sw = el.querySelector(".swatch");
+      var paint = function () { sw.style.background = el.querySelector(".p-color").value || "transparent"; };
+      paint();
+      el.querySelector(".p-color").addEventListener("input", paint);
+      el.querySelector(".remove").addEventListener("click", function () { el.remove(); renumber("projectsList", "Project"); });
+      return el;
+    }
+    function renderProjectRows(list) {
+      var box = $("projectsList"); box.innerHTML = "";
+      list.forEach(function (p, i) { box.appendChild(projectRow(p, i)); });
+    }
+    $("addProject").addEventListener("click", function () {
+      $("projectsList").appendChild(projectRow(null, $("projectsList").children.length));
+    });
+
+    // reviews
+    function reviewRow(r, i) {
+      r = r || { initials: "", name: "", role: "", quote: "" };
+      var el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML =
+        '<div class="item-head"><span>Review ' + (i + 1) + '</span><button class="remove" type="button">Remove</button></div>' +
+        '<div class="row"><div class="field"><label>Name</label><input class="r-name" /></div>' +
+        '<div class="field"><label>Role / company</label><input class="r-role" /></div></div>' +
+        '<div class="row"><div class="field"><label>Avatar initials (1–2 letters)</label><input class="r-initials" maxlength="3" /></div><div></div></div>' +
+        '<div class="field"><label>Quote</label><textarea class="r-quote"></textarea></div>';
+      el.querySelector(".r-name").value = r.name || "";
+      el.querySelector(".r-role").value = r.role || "";
+      el.querySelector(".r-initials").value = r.initials || "";
+      el.querySelector(".r-quote").value = r.quote || "";
+      el.querySelector(".remove").addEventListener("click", function () { el.remove(); renumber("reviewsList", "Review"); });
+      return el;
+    }
+    function renderReviewRows(list) {
+      var box = $("reviewsList"); box.innerHTML = "";
+      list.forEach(function (r, i) { box.appendChild(reviewRow(r, i)); });
+    }
+    $("addReview").addEventListener("click", function () {
+      $("reviewsList").appendChild(reviewRow(null, $("reviewsList").children.length));
+    });
+
+    function renumber(boxId, label) {
+      Array.from($(boxId).children).forEach(function (el, i) {
+        var s = el.querySelector(".item-head span"); if (s) s.textContent = label + " " + (i + 1);
+      });
+    }
+
+    // collect form -> content object
+    function collect() {
+      var projects = Array.from($("projectsList").children).map(function (el) {
+        return {
+          title: el.querySelector(".p-title").value.trim(),
+          tag: el.querySelector(".p-tag").value.trim(),
+          cat: el.querySelector(".p-cat").value,
+          color: el.querySelector(".p-color").value.trim(),
+          image: el.querySelector(".p-image").value.trim()
+        };
+      }).filter(function (p) { return p.title || p.tag; });
+      var reviews = Array.from($("reviewsList").children).map(function (el) {
+        return {
+          initials: el.querySelector(".r-initials").value.trim(),
+          name: el.querySelector(".r-name").value.trim(),
+          role: el.querySelector(".r-role").value.trim(),
+          quote: el.querySelector(".r-quote").value.trim()
+        };
+      }).filter(function (r) { return r.name || r.quote; });
+      return {
+        hero: { tagline: $("heroTagline").value.trim() },
+        about: { story: $("aboutStory").value.trim() },
+        contact: { dm: $("cDm").value.trim(), instagram: $("cInsta").value.trim(), tiktok: $("cTiktok").value.trim() },
+        projects: projects,
+        reviews: reviews
+      };
+    }
+
+    $("saveBtn").addEventListener("click", function () {
+      content = collect();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      toast("Saved — refresh the site to preview");
+    });
+
+    $("exportBtn").addEventListener("click", function () {
+      content = collect();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      var blob = new Blob([JSON.stringify(content, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = "content.json"; a.click();
+      URL.revokeObjectURL(url);
+      toast("Downloaded content.json");
+    });
+
+    $("importFile").addEventListener("change", function (e) {
+      var file = e.target.files[0]; if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        try { content = deepMerge(JSON.parse(JSON.stringify(DEFAULTS)), JSON.parse(reader.result)); fillForm(content); toast("Imported — remember to Save"); }
+        catch (err) { toast("That file isn't valid JSON"); }
+      };
+      reader.readAsText(file);
+      e.target.value = "";
+    });
+
+    $("resetBtn").addEventListener("click", async function () {
+      if (!confirm("Clear this browser's saved edits and reload from content.json?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      content = await loadContent(); fillForm(content); toast("Edits cleared");
+    });
+  </script>
+</body>
+</html>
