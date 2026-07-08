@@ -112,6 +112,19 @@
   :root[data-theme="dark"] .aurora { opacity: 0.28; }
   :root[data-theme="light"] .aurora { opacity: 0.15; }
 
+  /* ---------- Flowing animated background (canvas) ---------- */
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  :root[data-theme="light"] .bg-canvas { opacity: 0.7; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .bg-canvas { opacity: 0.7; }
+  }
+
   /* ---------- Moving gradient blobs ---------- */
   .blobs {
     position: fixed;
@@ -557,7 +570,20 @@
   }
   .work-item .thumb {
     position: absolute; inset: 0;
+    background-size: cover; background-position: center;
     transition: transform 0.7s cubic-bezier(.2,.7,.2,1), filter 0.5s ease;
+  }
+  /* grain + depth so the gradients read as real imagery, not a flat AI wash */
+  .work-item .thumb::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.16; mix-blend-mode: overlay;
+  }
+  .work-item .thumb::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.22), transparent 45%),
+      linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.28) 100%);
   }
   .work-item:hover .thumb { transform: scale(1.08); }
   .work-item .overlay {
@@ -659,7 +685,7 @@
   .cta-box h2 { color: #fff; font-size: clamp(2.4rem, 7vw, 5rem); }
   .cta-box p { color: rgba(255,255,255,0.9); font-size: 1.2rem; margin: 1.2rem auto 2.4rem; max-width: 32ch; }
   .cta-box .btn-white {
-    background: #fff; color: var(--ink);
+    background: #fff; color: #0b0c1a;
     box-shadow: 0 14px 40px -14px rgba(0,0,0,0.4);
   }
   .cta-box .btn-white:hover { transform: translateY(-3px) scale(1.04); color: var(--pink); }

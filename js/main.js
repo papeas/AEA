@@ -12,12 +12,12 @@ const DEFAULTS = {
     tiktok: "https://www.tiktok.com/@nexus_aea?_r=1&_t=ZN-97qbXWTNPzK"
   },
   projects: [
-    { title: "Bloom & Co.",     tag: "E-commerce", cat: "ecommerce", color: "linear-gradient(135deg, #ff2e93, #ff8f5e)", image: "" },
-    { title: "Driftboard",      tag: "SaaS",       cat: "saas",      color: "linear-gradient(135deg, #2e6bff, #4facfe)", image: "" },
-    { title: "Studio Vega",     tag: "Portfolio",  cat: "portfolio", color: "linear-gradient(135deg, #7b2ff7, #ff2e93)", image: "" },
-    { title: "Orbit Labs",      tag: "Launch",     cat: "launch",    color: "linear-gradient(135deg, #2e6bff, #ff2e93)", image: "" },
-    { title: "Coast Supply",    tag: "E-commerce", cat: "ecommerce", color: "linear-gradient(135deg, #2e6bff, #ff2e93)", image: "" },
-    { title: "Pulse Analytics", tag: "SaaS",       cat: "saas",      color: "linear-gradient(135deg, #7b2ff7, #ff2e93)", image: "" }
+    { title: "Bloom & Co.",     tag: "E-commerce", cat: "ecommerce", color: "radial-gradient(90% 90% at 18% 18%, #ffb27a 0%, transparent 50%), radial-gradient(85% 85% at 82% 24%, #ff4f7e 0%, transparent 55%), radial-gradient(120% 120% at 60% 105%, #4a1e4d 0%, transparent 60%), linear-gradient(150deg, #2c1430, #9c3a63)", image: "" },
+    { title: "Driftboard",      tag: "SaaS",       cat: "saas",      color: "radial-gradient(90% 90% at 22% 16%, #7fd6ff 0%, transparent 50%), radial-gradient(85% 85% at 82% 30%, #2e6bff 0%, transparent 55%), radial-gradient(120% 120% at 50% 105%, #0c1638 0%, transparent 60%), linear-gradient(155deg, #0e1a3c, #274bb8)", image: "" },
+    { title: "Studio Vega",     tag: "Portfolio",  cat: "portfolio", color: "radial-gradient(90% 90% at 24% 20%, #cf8bff 0%, transparent 50%), radial-gradient(80% 80% at 82% 20%, #ff5aa0 0%, transparent 52%), radial-gradient(120% 120% at 58% 105%, #1a0f38 0%, transparent 60%), linear-gradient(150deg, #170e2e, #5a2a94)", image: "" },
+    { title: "Orbit Labs",      tag: "Launch",     cat: "launch",    color: "radial-gradient(85% 85% at 20% 24%, #5b8dff 0%, transparent 50%), radial-gradient(85% 85% at 84% 34%, #ff5ea0 0%, transparent 52%), radial-gradient(120% 120% at 55% 105%, #0a0d2a 0%, transparent 60%), linear-gradient(155deg, #0b0f2c, #35267f)", image: "" },
+    { title: "Coast Supply",    tag: "E-commerce", cat: "ecommerce", color: "radial-gradient(90% 90% at 18% 22%, #6fe3cb 0%, transparent 50%), radial-gradient(85% 85% at 82% 28%, #3b82f6 0%, transparent 55%), radial-gradient(120% 120% at 60% 105%, #0d2b3a 0%, transparent 60%), linear-gradient(155deg, #0e2735, #2b6a86)", image: "" },
+    { title: "Pulse Analytics", tag: "SaaS",       cat: "saas",      color: "radial-gradient(90% 90% at 22% 20%, #ff9d78 0%, transparent 50%), radial-gradient(85% 85% at 80% 30%, #d43e93 0%, transparent 55%), radial-gradient(120% 120% at 55% 105%, #22103a 0%, transparent 60%), linear-gradient(155deg, #1a1030, #6f2b86)", image: "" }
   ],
   reviews: [
     { initials: "MC", name: "Maya Chen",     role: "Founder, Bloom & Co.",        quote: "Nexus turned a vague idea into a site that actually converts. Sharp, fast, and genuinely fun to work with." },
@@ -107,6 +107,73 @@ function applyContent(c) {
   set("menuContact", c.contact.dm, "href");
   set("socialInstagram", c.contact.instagram, "href");
   set("socialTiktok", c.contact.tiktok, "href");
+}
+
+// ============================================================
+//  Flowing animated background (canvas) — soft drifting colour fields
+// ============================================================
+function initBackground() {
+  const canvas = document.getElementById("bgCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, DPR = 1;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+    W = canvas.width = Math.floor(window.innerWidth * DPR);
+    H = canvas.height = Math.floor(window.innerHeight * DPR);
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+  }
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+
+  const palette = ["#ff2e93", "#2e6bff", "#7b2ff7", "#ff6ec4", "#4facfe"];
+  const orbs = palette.map((color, i) => ({
+    color,
+    bx: 0.2 + (i / palette.length) * 0.6,
+    by: 0.25 + ((i * 0.37) % 1) * 0.5,
+    r: 0.42 + (i % 3) * 0.12,
+    px: Math.random() * Math.PI * 2,
+    py: Math.random() * Math.PI * 2,
+    sp: 0.00005 + Math.random() * 0.00006
+  }));
+
+  let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5;
+  if (!reduce) {
+    window.addEventListener("mousemove", (e) => {
+      tmx = e.clientX / window.innerWidth;
+      tmy = e.clientY / window.innerHeight;
+    }, { passive: true });
+  }
+
+  const rgba = (hex, a) => {
+    const n = parseInt(hex.slice(1), 16);
+    return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+  };
+
+  function frame(t) {
+    mx += (tmx - mx) * 0.03;
+    my += (tmy - my) * 0.03;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "lighter";
+    const base = Math.min(W, H);
+    for (const o of orbs) {
+      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.16 + (mx - 0.5) * 0.05) * W;
+      const cy = (o.by + Math.cos(t * o.sp * 1.15 + o.py) * 0.16 + (my - 0.5) * 0.05) * H;
+      const rad = o.r * base;
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+      g.addColorStop(0, rgba(o.color, 0.5));
+      g.addColorStop(1, rgba(o.color, 0));
+      ctx.fillStyle = g;
+      ctx.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
+    }
+    ctx.globalCompositeOperation = "source-over";
+  }
+
+  if (reduce) { frame(0); return; }
+  (function loop(t) { frame(t); requestAnimationFrame(loop); })(0);
 }
 
 // ============================================================
@@ -250,6 +317,7 @@ function initBehaviors() {
 
 // ---- Boot: load content, render, then wire behaviours ----
 (async function boot() {
+  initBackground();
   const content = await loadContent();
   renderProjects(content.projects);
   renderReviews(content.reviews);

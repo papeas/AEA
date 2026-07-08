@@ -11,12 +11,12 @@
     "tiktok": "https://www.tiktok.com/@nexus_aea?_r=1&_t=ZN-97qbXWTNPzK"
   },
   "projects": [
-    { "title": "Bloom & Co.", "tag": "E-commerce", "cat": "ecommerce", "color": "linear-gradient(135deg, #ff2e93, #ff8f5e)", "image": "" },
-    { "title": "Driftboard", "tag": "SaaS", "cat": "saas", "color": "linear-gradient(135deg, #2e6bff, #4facfe)", "image": "" },
-    { "title": "Studio Vega", "tag": "Portfolio", "cat": "portfolio", "color": "linear-gradient(135deg, #7b2ff7, #ff2e93)", "image": "" },
-    { "title": "Orbit Labs", "tag": "Launch", "cat": "launch", "color": "linear-gradient(135deg, #2e6bff, #ff2e93)", "image": "" },
-    { "title": "Coast Supply", "tag": "E-commerce", "cat": "ecommerce", "color": "linear-gradient(135deg, #2e6bff, #ff2e93)", "image": "" },
-    { "title": "Pulse Analytics", "tag": "SaaS", "cat": "saas", "color": "linear-gradient(135deg, #7b2ff7, #ff2e93)", "image": "" }
+    { "title": "Bloom & Co.", "tag": "E-commerce", "cat": "ecommerce", "color": "radial-gradient(90% 90% at 18% 18%, #ffb27a 0%, transparent 50%), radial-gradient(85% 85% at 82% 24%, #ff4f7e 0%, transparent 55%), radial-gradient(120% 120% at 60% 105%, #4a1e4d 0%, transparent 60%), linear-gradient(150deg, #2c1430, #9c3a63)", "image": "" },
+    { "title": "Driftboard", "tag": "SaaS", "cat": "saas", "color": "radial-gradient(90% 90% at 22% 16%, #7fd6ff 0%, transparent 50%), radial-gradient(85% 85% at 82% 30%, #2e6bff 0%, transparent 55%), radial-gradient(120% 120% at 50% 105%, #0c1638 0%, transparent 60%), linear-gradient(155deg, #0e1a3c, #274bb8)", "image": "" },
+    { "title": "Studio Vega", "tag": "Portfolio", "cat": "portfolio", "color": "radial-gradient(90% 90% at 24% 20%, #cf8bff 0%, transparent 50%), radial-gradient(80% 80% at 82% 20%, #ff5aa0 0%, transparent 52%), radial-gradient(120% 120% at 58% 105%, #1a0f38 0%, transparent 60%), linear-gradient(150deg, #170e2e, #5a2a94)", "image": "" },
+    { "title": "Orbit Labs", "tag": "Launch", "cat": "launch", "color": "radial-gradient(85% 85% at 20% 24%, #5b8dff 0%, transparent 50%), radial-gradient(85% 85% at 84% 34%, #ff5ea0 0%, transparent 52%), radial-gradient(120% 120% at 55% 105%, #0a0d2a 0%, transparent 60%), linear-gradient(155deg, #0b0f2c, #35267f)", "image": "" },
+    { "title": "Coast Supply", "tag": "E-commerce", "cat": "ecommerce", "color": "radial-gradient(90% 90% at 18% 22%, #6fe3cb 0%, transparent 50%), radial-gradient(85% 85% at 82% 28%, #3b82f6 0%, transparent 55%), radial-gradient(120% 120% at 60% 105%, #0d2b3a 0%, transparent 60%), linear-gradient(155deg, #0e2735, #2b6a86)", "image": "" },
+    { "title": "Pulse Analytics", "tag": "SaaS", "cat": "saas", "color": "radial-gradient(90% 90% at 22% 20%, #ff9d78 0%, transparent 50%), radial-gradient(85% 85% at 80% 30%, #d43e93 0%, transparent 55%), radial-gradient(120% 120% at 55% 105%, #22103a 0%, transparent 60%), linear-gradient(155deg, #1a1030, #6f2b86)", "image": "" }
   ],
   "reviews": [
     { "initials": "MC", "name": "Maya Chen", "role": "Founder, Bloom & Co.", "quote": "Nexus turned a vague idea into a site that actually converts. Sharp, fast, and genuinely fun to work with." },
