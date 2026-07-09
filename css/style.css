@@ -494,7 +494,7 @@
   .value p { color: var(--ink-soft); font-size: 0.98rem; max-width: 34ch; }
 
   /* ---------- Services ---------- */
-  #services { background: var(--bg-alt); transition: background 0.4s ease; }
+  #services { background: transparent; }
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
   @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
   .card {
