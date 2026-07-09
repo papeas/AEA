@@ -118,11 +118,11 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.9;
+    opacity: 1;
   }
-  :root[data-theme="light"] .bg-canvas { opacity: 0.7; }
+  :root[data-theme="light"] .bg-canvas { opacity: 0.85; }
   @media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .bg-canvas { opacity: 0.7; }
+    :root:not([data-theme="dark"]) .bg-canvas { opacity: 0.85; }
   }
 
   /* ---------- Moving gradient blobs ---------- */

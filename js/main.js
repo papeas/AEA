@@ -136,6 +136,7 @@ function initBackground() {
     bx: 0.18 + (i / palette.length) * 0.64,
     by: 0.30 + ((i * 0.41) % 1) * 0.42,
     r: 0.55 + (i % 2) * 0.14,
+    dir: i % 2 ? 1 : -1,
     px: Math.random() * Math.PI * 2,
     py: Math.random() * Math.PI * 2,
     sp: 0.00018 + Math.random() * 0.00012
@@ -149,6 +150,10 @@ function initBackground() {
     }, { passive: true });
   }
 
+  // scroll drives the flow — the background moves as you scroll the page
+  let scrollY = window.scrollY || 0, tScrollY = scrollY;
+  window.addEventListener("scroll", () => { tScrollY = window.scrollY; }, { passive: true });
+
   const rgba = (hex, a) => {
     const n = parseInt(hex.slice(1), 16);
     return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
@@ -157,16 +162,25 @@ function initBackground() {
   function frame(t) {
     mx += (tmx - mx) * 0.03;
     my += (tmy - my) * 0.03;
+    scrollY += (tScrollY - scrollY) * 0.08; // eased scroll follow
+    const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const sf = Math.min(1, Math.max(0, scrollY / docH)); // 0..1 scroll progress
     ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = "lighter";
     const base = Math.min(W, H);
     for (const o of orbs) {
-      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.22 + (mx - 0.5) * 0.05) * W;
-      const cy = (o.by + Math.cos(t * o.sp * 1.15 + o.py) * 0.22 + (my - 0.5) * 0.05) * H;
+      const cx = (o.bx
+        + Math.sin(t * o.sp + o.px) * 0.18
+        + Math.sin(sf * Math.PI * 2 + o.px) * 0.30   // scroll sweeps them across
+        + (mx - 0.5) * 0.05) * W;
+      const cy = (o.by
+        + Math.cos(t * o.sp * 1.15 + o.py) * 0.18
+        - sf * 1.1 * o.dir                            // scroll parallax up/down
+        + (my - 0.5) * 0.05) * H;
       const rad = o.r * base * (1 + Math.sin(t * o.sp * 0.6 + o.py) * 0.14);
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
-      g.addColorStop(0, rgba(o.color, 0.42));
-      g.addColorStop(0.5, rgba(o.color, 0.16));
+      g.addColorStop(0, rgba(o.color, 0.58));
+      g.addColorStop(0.5, rgba(o.color, 0.24));
       g.addColorStop(1, rgba(o.color, 0));
       ctx.fillStyle = g;
       ctx.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
