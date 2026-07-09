@@ -135,7 +135,7 @@ function initBackground() {
     color,
     bx: 0.18 + (i / palette.length) * 0.64,
     by: 0.30 + ((i * 0.41) % 1) * 0.42,
-    r: 0.55 + (i % 2) * 0.14,
+    r: 0.46 + (i % 2) * 0.12,
     dir: i % 2 ? 1 : -1,
     px: Math.random() * Math.PI * 2,
     py: Math.random() * Math.PI * 2,
@@ -177,10 +177,12 @@ function initBackground() {
         + Math.cos(t * o.sp * 1.15 + o.py) * 0.18
         - sf * 1.1 * o.dir                            // scroll parallax up/down
         + (my - 0.5) * 0.05) * H;
-      const rad = o.r * base * (1 + Math.sin(t * o.sp * 0.6 + o.py) * 0.14);
+      const rad = o.r * base * (1 + Math.sin(t * o.sp * 0.6 + o.py) * 0.08);
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
-      g.addColorStop(0, rgba(o.color, 0.58));
-      g.addColorStop(0.5, rgba(o.color, 0.24));
+      // sharper falloff — a defined coloured core rather than a soft wash
+      g.addColorStop(0, rgba(o.color, 0.78));
+      g.addColorStop(0.32, rgba(o.color, 0.52));
+      g.addColorStop(0.62, rgba(o.color, 0.16));
       g.addColorStop(1, rgba(o.color, 0));
       ctx.fillStyle = g;
       ctx.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
