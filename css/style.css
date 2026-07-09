@@ -632,7 +632,9 @@
     animation: marquee 48s linear infinite;
   }
   .reviews-marquee:hover .reviews-track,
-  .reviews-marquee:focus-within .reviews-track { animation-play-state: paused; }
+  .reviews-marquee:focus-within .reviews-track,
+  .reviews-marquee.paused .reviews-track { animation-play-state: paused; }
+  .reviews-marquee { cursor: pointer; }
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(calc(-50% - 0.8rem)); }

@@ -138,7 +138,7 @@ function initBackground() {
     r: 0.55 + (i % 2) * 0.14,
     px: Math.random() * Math.PI * 2,
     py: Math.random() * Math.PI * 2,
-    sp: 0.00003 + Math.random() * 0.000025
+    sp: 0.00018 + Math.random() * 0.00012
   }));
 
   let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5;
@@ -161,9 +161,9 @@ function initBackground() {
     ctx.globalCompositeOperation = "lighter";
     const base = Math.min(W, H);
     for (const o of orbs) {
-      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.15 + (mx - 0.5) * 0.045) * W;
-      const cy = (o.by + Math.cos(t * o.sp * 1.12 + o.py) * 0.15 + (my - 0.5) * 0.045) * H;
-      const rad = o.r * base;
+      const cx = (o.bx + Math.sin(t * o.sp + o.px) * 0.22 + (mx - 0.5) * 0.05) * W;
+      const cy = (o.by + Math.cos(t * o.sp * 1.15 + o.py) * 0.22 + (my - 0.5) * 0.05) * H;
+      const rad = o.r * base * (1 + Math.sin(t * o.sp * 0.6 + o.py) * 0.14);
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
       g.addColorStop(0, rgba(o.color, 0.42));
       g.addColorStop(0.5, rgba(o.color, 0.16));
@@ -266,6 +266,13 @@ function initBehaviors() {
       });
     });
   });
+
+  // ---- Reviews: tap to pause so people can read (works on touch) ----
+  (function () {
+    const marquee = document.querySelector(".reviews-marquee");
+    if (!marquee) return;
+    marquee.addEventListener("click", () => marquee.classList.toggle("paused"));
+  })();
 
   // ---- Custom cursor (fine pointers only) ----
   if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
