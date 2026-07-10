@@ -423,6 +423,32 @@ section[id] { scroll-margin-top: 72px; }
   color: var(--blue);
 }
 .plan__cta { margin-top: auto; justify-content: center; }
+.plans__more { margin-top: 1.8rem; text-align: center; }
+.plans__more a {
+  font-weight: 600;
+  color: var(--blue);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.plans__more a:hover { border-color: var(--blue); }
+
+/* ============ Plans page ============ */
+.plans-page__header { padding: 4rem 0 1rem; text-align: center; }
+.plans-page__header h1 { font-size: clamp(2rem, 4.5vw, 3rem); }
+.plans-page__header p {
+  color: var(--ink-soft);
+  max-width: 54ch;
+  margin: 1rem auto 0;
+  font-size: 1.05rem;
+}
+.plans-page__note {
+  max-width: 640px;
+  margin: 2.5rem auto 0;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.plans-page__note strong { color: var(--ink); }
 
 /* ============ Reveal-on-scroll ============ */
 @media (prefers-reduced-motion: no-preference) {
