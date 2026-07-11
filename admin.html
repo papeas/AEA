@@ -105,10 +105,37 @@
     </header>
 
     <div class="note">
-      <strong>How saving works.</strong> <b>Save</b> stores your changes in this browser so you can preview them on the site right away.
-      To publish them for <em>everyone</em>, click <b>Download content.json</b> and replace that file in the repository (drag-and-drop on GitHub works).
-      This password is a light gate on a static site — it keeps casual visitors out, but isn't strong security.
+      <strong>How saving works.</strong> <b>Publish to site</b> (below) saves your changes to the live site for everyone.
+      <b>Save</b> only previews them in this browser. This password is a light gate on a static site — it keeps casual visitors out, but isn't strong security.
     </div>
+
+    <!-- Publish -->
+    <section class="block" style="border-color: color-mix(in srgb, var(--pink) 40%, var(--line));">
+      <h2>Publish to the live site</h2>
+      <p class="muted" style="margin-bottom: 1rem">
+        One click saves everything (text, projects, photos, prices) straight to the live site. Paste a GitHub token once — it's stored only in this browser, on this device.
+        <a href="#" id="tokenHelp">How do I get a token?</a>
+      </p>
+      <div id="tokenHelpPanel" class="note hidden" style="margin-bottom: 1rem">
+        <strong>Create a token once (~2 min):</strong>
+        <ol style="margin: 0.5rem 0 0 1.2rem; line-height: 1.75;">
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> (sign in as the repo owner).</li>
+          <li>Name it "Nexus admin". Pick an expiration.</li>
+          <li>Repository access → <b>Only select repositories</b> → choose <b>AEA</b>.</li>
+          <li>Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b>.</li>
+          <li><b>Generate token</b>, copy it, and paste it below.</li>
+        </ol>
+      </div>
+      <div class="field">
+        <label for="ghToken">GitHub token</label>
+        <input type="password" id="ghToken" placeholder="github_pat_…" autocomplete="off" />
+      </div>
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+        <button class="btn btn-primary" id="publishBtn" type="button">Publish to site</button>
+        <button class="btn btn-ghost" id="forgetToken" type="button">Forget token</button>
+      </div>
+      <div class="err" id="publishStatus" style="color: var(--ink-soft);"></div>
+    </section>
 
     <!-- Hero + About -->
     <section class="block">
@@ -397,6 +424,82 @@
       if (!confirm("Clear this browser's saved edits and reload from content.json?")) return;
       localStorage.removeItem(STORAGE_KEY);
       content = await loadContent(); fillForm(content); toast("Edits cleared");
+    });
+
+    // ---- Publish straight to GitHub (one-click save to the live site) ----
+    var GH = { owner: "papeas", repo: "AEA", path: "content.json", branch: "claude/website-redesign-dtk3ng" };
+    var TOKEN_KEY = "nexus_gh_token";
+
+    var savedTok = localStorage.getItem(TOKEN_KEY);
+    if (savedTok && $("ghToken")) $("ghToken").value = savedTok;
+
+    function setPublishStatus(msg, kind) {
+      var s = $("publishStatus"); if (!s) return;
+      s.textContent = msg;
+      s.style.color = kind === "ok" ? "#38d39f" : kind === "bad" ? "#ff6b6b" : "var(--ink-soft)";
+    }
+
+    function b64utf8(str) {
+      var bytes = new TextEncoder().encode(str), bin = "";
+      for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin);
+    }
+
+    $("tokenHelp") && $("tokenHelp").addEventListener("click", function (e) {
+      e.preventDefault(); $("tokenHelpPanel").classList.toggle("hidden");
+    });
+
+    $("forgetToken") && $("forgetToken").addEventListener("click", function () {
+      localStorage.removeItem(TOKEN_KEY); if ($("ghToken")) $("ghToken").value = "";
+      setPublishStatus("Token removed from this device.");
+    });
+
+    async function publishToGitHub(token, obj) {
+      var base = "https://api.github.com/repos/" + GH.owner + "/" + GH.repo + "/contents/" + GH.path;
+      var headers = {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28"
+      };
+      var sha;
+      var getRes = await fetch(base + "?ref=" + encodeURIComponent(GH.branch), { headers: headers });
+      if (getRes.status === 200) { sha = (await getRes.json()).sha; }
+      else if (getRes.status === 401) { throw new Error("token not accepted — check you pasted it correctly."); }
+      else if (getRes.status === 403) { throw new Error("token lacks permission — it needs Contents: Read and write on AEA."); }
+      else if (getRes.status !== 404) { throw new Error("GitHub returned " + getRes.status + " while reading the file."); }
+      var payload = {
+        message: "Update site content via admin",
+        content: b64utf8(JSON.stringify(obj, null, 2)),
+        branch: GH.branch
+      };
+      if (sha) payload.sha = sha;
+      var putRes = await fetch(base, { method: "PUT", headers: headers, body: JSON.stringify(payload) });
+      if (!putRes.ok) {
+        var e = {}; try { e = await putRes.json(); } catch (_) {}
+        if (putRes.status === 401 || putRes.status === 403) throw new Error("permission denied — the token needs Contents: Read and write on AEA.");
+        if (putRes.status === 404) throw new Error("repo/branch not found — check the token can access papeas/AEA.");
+        if (putRes.status === 409 || putRes.status === 422) throw new Error("conflict — try Publish again (the file changed).");
+        throw new Error(e.message || ("GitHub returned " + putRes.status));
+      }
+      return true;
+    }
+
+    $("publishBtn") && $("publishBtn").addEventListener("click", async function () {
+      var token = ($("ghToken").value || "").trim();
+      if (!token) { setPublishStatus("Paste your GitHub token first (see the link above).", "bad"); return; }
+      localStorage.setItem(TOKEN_KEY, token);
+      content = collect();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      $("publishBtn").disabled = true;
+      setPublishStatus("Publishing…");
+      try {
+        await publishToGitHub(token, content);
+        setPublishStatus("✓ Published! Your live site updates in about 1–2 minutes.", "ok");
+      } catch (err) {
+        setPublishStatus("Could not publish: " + err.message, "bad");
+      } finally {
+        $("publishBtn").disabled = false;
+      }
     });
   </script>
 </body>
