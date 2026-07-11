@@ -673,6 +673,71 @@
     .reviews-track .review-dup { display: none; }
   }
 
+  /* ---------- Pricing / Plans ---------- */
+  .pricing-head { max-width: 44rem; margin: 0 auto 3.2rem; text-align: center; }
+  .pricing-head .kicker { justify-content: center; }
+  .pricing-head .kicker::before { display: none; }
+  .pricing-head .lead { margin-left: auto; margin-right: auto; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+    align-items: stretch;
+  }
+  @media (max-width: 860px) { .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+  .price-card {
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: 2.3rem 1.9rem;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .price-card:hover { transform: translateY(-8px); border-color: var(--pink); box-shadow: 0 30px 60px -32px var(--blue); }
+  .price-card.featured {
+    border: 1.5px solid transparent;
+    background:
+      linear-gradient(var(--bg-alt), var(--bg-alt)) padding-box,
+      var(--grad) border-box;
+    box-shadow: 0 34px 70px -36px var(--pink);
+  }
+  .price-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--grad); color: #fff;
+    font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 700;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 0.4rem 0.95rem; border-radius: 100px; white-space: nowrap;
+  }
+  .price-name { font-family: "Space Grotesk", system-ui, sans-serif; font-size: 1.4rem; font-weight: 700; }
+  .price-amount {
+    font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 700; font-size: 1.2rem;
+    margin: 0.5rem 0 0.15rem;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .price-desc { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.4rem; }
+  .price-feats { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.8rem; }
+  .price-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.95rem; color: var(--ink); }
+  .price-feats li::before {
+    content: ""; flex: 0 0 18px; height: 18px; margin-top: 1px;
+    background: var(--grad);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .price-btn {
+    margin-top: auto; display: block; text-align: center;
+    padding: 0.85rem 1.2rem; border-radius: 100px;
+    font-family: "Inter", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem;
+    border: 1.5px solid var(--line); color: var(--ink); background: transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, background-position 0.6s ease;
+  }
+  .price-btn:hover { border-color: var(--pink); color: var(--pink); transform: translateY(-2px); }
+  .price-btn.primary { background: var(--grad); background-size: 160% 160%; color: #fff; border-color: transparent; box-shadow: 0 12px 30px -14px var(--pink); }
+  .price-btn.primary:hover { color: #fff; background-position: 100% 0; transform: translateY(-2px); }
+  .pricing-note { text-align: center; color: var(--ink-soft); font-size: 0.98rem; margin: 2.6rem auto 0; max-width: 40rem; }
+  .pricing-note strong { color: var(--ink); }
+
   /* ---------- Contact CTA ---------- */
   #contact { text-align: center; }
   .cta-box {
