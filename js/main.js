@@ -75,7 +75,7 @@ function renderProjects(projects) {
       : escHtml(p.color || "linear-gradient(135deg, #ff2e93, #2e6bff)");
     return `
       <a class="work-item reveal ${delay}" data-cat="${escHtml(p.cat || "all")}" href="#contact" aria-label="${escHtml(p.title)} — ${escHtml(p.tag)} project">
-        <div class="thumb" style="background:${bg}"></div>
+        <div class="thumb${p.image ? " has-image" : ""}" style="background:${bg}"></div>
         <div class="arrow">${ARROW}</div>
         <div class="overlay"><span class="tag">${escHtml(p.tag)}</span><h3>${escHtml(p.title)}</h3></div>
       </a>`;
@@ -283,11 +283,12 @@ function initBehaviors() {
     });
   });
 
-  // ---- Reviews: tap to pause so people can read (works on touch) ----
+  // ---- Reviews: press a review to pause, press elsewhere to resume ----
   (function () {
     const marquee = document.querySelector(".reviews-marquee");
     if (!marquee) return;
-    marquee.addEventListener("click", () => marquee.classList.toggle("paused"));
+    marquee.addEventListener("click", (e) => { e.stopPropagation(); marquee.classList.add("paused"); });
+    document.addEventListener("click", () => marquee.classList.remove("paused"));
   })();
 
   // ---- Custom cursor (fine pointers only) ----
