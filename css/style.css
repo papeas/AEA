@@ -423,7 +423,13 @@ section[id] { scroll-margin-top: 72px; }
   color: var(--blue);
 }
 .plan__cta { margin-top: auto; justify-content: center; }
-.plans__more { margin-top: 1.8rem; text-align: center; }
+.plans__terms {
+  margin-top: 1.6rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.plans__more { margin-top: 0.8rem; text-align: center; }
 .plans__more a {
   font-weight: 600;
   color: var(--blue);
@@ -443,12 +449,35 @@ section[id] { scroll-margin-top: 72px; }
 }
 .plans-page__note {
   max-width: 640px;
-  margin: 2.5rem auto 0;
+  margin: 2.2rem auto 0;
   text-align: center;
   color: var(--ink-soft);
   font-size: 0.92rem;
 }
 .plans-page__note strong { color: var(--ink); }
+.plans-notes {
+  max-width: 640px;
+  margin: 3rem auto 0;
+  background: var(--tint);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.8rem;
+}
+.plans-notes h2 { font-size: 1.15rem; margin-bottom: 0.9rem; }
+.plans-notes ul { display: grid; gap: 0.6rem; }
+.plans-notes li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+}
+.plans-notes li::before {
+  content: "•";
+  position: absolute;
+  left: 0.3rem;
+  color: var(--blue);
+  font-weight: 700;
+}
 
 /* ============ Reveal-on-scroll ============ */
 @media (prefers-reduced-motion: no-preference) {
