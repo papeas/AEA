@@ -117,10 +117,13 @@ function initBackground() {
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = window.matchMedia("(pointer: coarse)").matches; // phones / tablets
   let W = 0, H = 0, DPR = 1;
 
   function resize() {
-    DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+    // render at a low internal resolution (blobs are soft, so it's invisible)
+    // and lower still on touch devices where fill-rate is the bottleneck
+    DPR = Math.min(window.devicePixelRatio || 1, coarse ? 0.6 : 1);
     W = canvas.width = Math.floor(window.innerWidth * DPR);
     H = canvas.height = Math.floor(window.innerHeight * DPR);
     canvas.style.width = window.innerWidth + "px";
@@ -191,7 +194,19 @@ function initBackground() {
   }
 
   if (reduce) { frame(0); return; }
-  (function loop(t) { frame(t); requestAnimationFrame(loop); })(0);
+  // throttle to ~30fps and stop entirely when the tab/window isn't visible
+  const minDelta = 1000 / 30;
+  let last = -1e9, raf = 0, running = false;
+  function loop(t) {
+    raf = requestAnimationFrame(loop);
+    if (t - last < minDelta) return;
+    last = t;
+    frame(t);
+  }
+  function start() { if (!running) { running = true; last = -1e9; raf = requestAnimationFrame(loop); } }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  document.addEventListener("visibilitychange", () => { document.hidden ? stop() : start(); });
+  start();
 }
 
 // ============================================================

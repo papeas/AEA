@@ -97,7 +97,7 @@
       color-mix(in srgb, var(--pink) 60%, transparent) 52%,
       color-mix(in srgb, var(--blue) 55%, transparent) 74%,
       transparent 92%);
-    filter: blur(40px) saturate(1.25);
+    filter: blur(28px) saturate(1.2);
     transform-origin: 50% 14%;
     opacity: 0.15;
     animation: breathe 9s ease-in-out infinite;
@@ -784,4 +784,13 @@
     *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .menu-link, .menu-meta { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Performance: lighten heavy effects on touch devices ---------- */
+  @media (pointer: coarse) {
+    .aurora { display: none; }                 /* the canvas already provides the colour */
+    nav.scrolled { backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
+    .menu { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .work-item .arrow { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.24); }
+    .work-item .thumb::before { display: none; }  /* skip the grain texture */
   }
